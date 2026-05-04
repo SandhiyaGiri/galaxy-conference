@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: hsl(263.4 70% 50.4%);
+  --color-lego-red: hsl(0 85% 50%);
+  --color-lego-blue: hsl(215 90% 50%);
+  --color-lego-yellow: hsl(45 100% 50%);
+  --color-lego-green: hsl(145 80% 45%);
+  --color-lego-orange: hsl(25 100% 50%);
+  --color-lego-purple: hsl(265 80% 55%);
+  --color-lego-white: hsl(0 0% 100%);
+  --color-lego-black: hsl(0 0% 10%);
+}
+
+:root {
+  --background: 210 20% 98%;
+  --foreground: 224 71.4% 4.1%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71.4% 4.1%;
+
+  --primary: 263.4 70% 50.4%; /* Finzly Blushing Purple */
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 263.4 70% 50.4%;
+
+  --radius: 1rem;
+
+  /* Vibrant Traditional Lego Palette (Variables for use in inline styles) */
+  --lego-red: 0 85% 50%;
+  --lego-blue: 215 90% 50%;
+  --lego-yellow: 45 100% 50%;
+  --lego-green: 145 80% 45%;
+  --lego-orange: 25 100% 50%;
+  --lego-purple: 265 80% 55%;
+  --lego-white: 0 0% 100%;
+  --lego-black: 0 0% 10%;
+}
+
+body {
+  margin: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Outfit', 'Inter', sans-serif;
+  overflow: hidden; /* For Kiosk feel */
+  min-height: 100vh;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+
+.kiosk-modal-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  isolation: isolate;
+  background: 
+    linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.5)),
+    linear-gradient(135deg, hsla(var(--primary), 0.1), transparent 60%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    0 32px 96px -28px rgba(76, 29, 149, 0.15),
+    0 18px 40px -24px rgba(15, 23, 42, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+}
+
+.luxury-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 65%,
+      transparent 100%);
+  transform: rotate(-45deg);
+  animation: shine 6s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(-45deg); }
+  20% { transform: translateX(100%) rotate(-45deg); }
+  100% { transform: translateX(100%) rotate(-45deg); }
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Typography */
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.kiosk-modal-primary-button {
+  @apply w-full py-4 px-8 rounded-2xl bg-primary text-white font-black uppercase tracking-widest
+         transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-[0.98]
+         shadow-lg shadow-primary/20 border border-white/20;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}

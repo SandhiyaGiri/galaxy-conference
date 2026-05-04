@@ -13,6 +13,7 @@ import {
 import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
+import finzlyLogo from "./assets/finzly-logo.png";
 
 const COLORS: Record<string, { color: BrickColor; label: string }> = {
   payment: { color: "green", label: "Payment Galaxy" },
@@ -149,7 +150,7 @@ export default function App() {
       {/* Brand Logo */}
       <div className="absolute top-10 left-10 z-20">
         <img 
-          src="/src/assets/finzly-logo.png" 
+          src={finzlyLogo} 
           alt="Finzly Logo" 
           className="h-10 w-auto opacity-90"
         />

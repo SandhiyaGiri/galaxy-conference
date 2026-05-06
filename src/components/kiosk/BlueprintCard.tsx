@@ -57,8 +57,8 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 md:p-8 border-b border-slate-200 flex flex-col md:flex-row justify-between items-start bg-white gap-4 md:gap-0">
-          <div className="flex gap-4 md:gap-6 items-center">
+        <div className="p-4 md:p-8 border-b border-slate-200 flex flex-row justify-between items-start bg-white gap-4">
+          <div className="flex flex-1 gap-4 md:gap-6 items-center">
             <div className="text-primary p-3 md:p-4 bg-white rounded-xl md:rounded-2xl shadow-sm border border-black/5">
               {lever.icon}
             </div>

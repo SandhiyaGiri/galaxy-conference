@@ -157,28 +157,37 @@ export default function App() {
       </div>
 
       {/* Kiosk Header */}
-      <header className="pt-24 pb-10 text-center relative z-10">
+      <header className="pt-24 pb-6 md:pb-10 text-center relative z-10 px-4">
         <motion.h1 
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="text-8xl font-black tracking-tighter text-slate-900 uppercase mb-4 drop-shadow-sm font-outfit"
+          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 uppercase mb-4 drop-shadow-sm font-outfit"
         >
-          Build Your Bank
+          Mix. Match. Launch.
         </motion.h1>
         
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-2xl text-slate-500 font-bold uppercase tracking-widest font-outfit"
+          className="text-lg md:text-2xl text-slate-500 font-bold uppercase tracking-widest font-outfit mb-4 md:mb-6"
         >
-          Select a capability to explore the architecture
+          Build your bank's future — one block at a time. Welcome to composable banking.
+        </motion.p>
+        
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-sm md:text-lg text-slate-600 font-medium max-w-3xl mx-auto font-outfit leading-relaxed"
+        >
+          Just like LEGO bricks snap together to create anything imaginable, our Galaxy capabilities let you assemble powerful banking capabilities — piece by piece, your way. Mix. Match. Launch.
         </motion.p>
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-10 pb-20 overflow-y-auto custom-scrollbar relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-20 pt-10">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-20 overflow-y-auto custom-scrollbar relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-20 pt-4 md:pt-10">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}
@@ -218,18 +227,18 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer / System Status */}
-      <footer className="p-8 border-t border-black/5 bg-white/60 backdrop-blur-xl relative z-10">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex gap-4">
+      <footer className="p-4 md:p-8 border-t border-black/5 bg-white/60 backdrop-blur-xl relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+          <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4">
             {Object.entries(COLORS).map(([name, data]) => (
-               <div key={name} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/40 border border-black/5">
-                 <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: `hsl(var(--lego-${data.color}))` }} />
-                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-600">{data.label}</span>
+               <div key={name} className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/40 border border-black/5">
+                 <div className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full`} style={{ backgroundColor: `hsl(var(--lego-${data.color}))` }} />
+                 <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-slate-600">{data.label}</span>
                </div>
             ))}
           </div>
-          <div className="text-right">
-             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Galaxy Orchestration Engine v4.0.2</p>
+          <div className="text-center md:text-right mt-2 md:mt-0">
+             <p className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-slate-400">Galaxy Orchestration Engine v4.0.2</p>
           </div>
         </div>
       </footer>

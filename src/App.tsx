@@ -36,6 +36,7 @@ const LEVERS = [
       { galaxy: "account", label: "Accounts & Ledger", sub: "Embedded account infrastructure" },
     ],
     outcomes: ["New non-interest revenue from API licensing", "Pay-by-bank APIs for merchants and platforms", "Deeper ERP/AR-AP integrations for sticky customers", "Attract SMB and mid-market segments"],
+    reps: ["sam", "scott", "melissa", "chris"],
   },
   {
     id: 2, icon: <Users size={48} />, title: "Partner Banking",
@@ -50,6 +51,7 @@ const LEVERS = [
       { galaxy: "digital", label: "VAM Portal", sub: "White-label recon UX" },
     ],
     outcomes: ["Launch fintech partnerships in weeks not months", "Earn fee income on every partner transaction", "No middleware or BaaS platform cost", "Real-time reconciliation for all partners"],
+    reps: ["steve"],
   },
   {
     id: 3, icon: <Building2 size={48} />, title: "Specialty Deposits",
@@ -63,6 +65,7 @@ const LEVERS = [
       { galaxy: "token", label: "Tokenized Deposit Account", sub: "Digital asset deposits" },
     ],
     outcomes: ["Launch IOLTA, escrow, class action, fintech accounts in days", "POBO/COBO service — payments and collections on behalf of clients", "Collections + payment automation with reconciliation", "Tokenized deposit accounts for institutional clients via Token Galaxy"],
+    reps: ["sam", "scott", "melissa", "chris"],
   },
   {
     id: 4, icon: <Globe size={48} />, title: "FX & International",
@@ -77,6 +80,7 @@ const LEVERS = [
       { galaxy: "payment", label: "Payment Galaxy", sub: "All rails — intl execution" },
     ],
     outcomes: ["New FX fee revenue from commercial clients", "Multi-currency accounts for international businesses", "Advanced FX instruments — compete with money-center banks", "Full international rails execution via Payment Galaxy"],
+    reps: ["brian"],
   },
   {
     id: 5, icon: <Sparkles size={48} />, title: "Digital Experiences",
@@ -92,6 +96,7 @@ const LEVERS = [
       { galaxy: "digital", label: "Consumer Payments", sub: "Wires and instant payments" },
     ],
     outcomes: ["Match the largest bank digital experiences", "Already in the Q2 and broader digital banking ecosystem", "Pay-by-bank — no card rails, lower cost", "White-label partner VAM portal for fintechs under your brand"],
+    reps: ["melissa", "sam"],
   },
   {
     id: 6, icon: <Settings size={48} />, title: "Payment Modernization",
@@ -109,6 +114,7 @@ const LEVERS = [
       { galaxy: "payment", label: "Payment Orchestration", sub: "Route across all rails" },
     ],
     outcomes: ["Modular transformation — surround and shrink legacy core", "Unify all rails under one engine", "Pure orchestration for incumbents — no rip and replace", "Award-winning reliability — $50B+ processed"],
+    reps: ["scott", "sam"],
   },
   {
     id: 7, icon: <TrendingUp size={48} />, title: "Trade Finance & Swaps",
@@ -122,6 +128,7 @@ const LEVERS = [
       { galaxy: "trade", label: "Swap STAR", sub: "IRS, CDS, structured products" },
     ],
     outcomes: ["Offer letters of credit and bank guarantees to importers/exporters", "Earn swap fee income — retain deals you'd previously refer out", "Interest rate swaps for commercial loan hedging", "Compete with regional and money-center banks for complex deals"],
+    reps: ["brian"],
   },
   {
     id: 8, icon: <Coins size={48} />, title: "Tokenized Deposits",
@@ -136,6 +143,7 @@ const LEVERS = [
       { galaxy: "token", label: "Token Galaxy", sub: "Value orchestration — blockchain as invisible plumbing" },
     ],
     outcomes: ["Easily join a consortium with confidence", "Issue tokenized deposits with complete ledger and settlement control", "Provide wallet experience for digital assets", "Unified ledger — no separate systems for digital assets"],
+    reps: ["steve"],
   },
 ];
 
@@ -170,9 +178,18 @@ export default function App() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-widest font-outfit mb-2"
+          className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-widest font-outfit mb-1"
         >
           Build your bank's future — one block at a time.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.45 }}
+          className="text-base md:text-xl text-primary font-black font-outfit tracking-tight mb-2"
+        >
+          What's your next growth play?
         </motion.p>
       </header>
 
@@ -212,7 +229,7 @@ export default function App() {
                   {lever.blocks.map(block => (
                     <span
                       key={block}
-                      className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide font-outfit"
+                      className="px-3 py-1 rounded-full text-[10px] font-black tracking-wide font-outfit"
                       style={{
                         backgroundColor: `hsl(var(--lego-${COLORS[block].color}) / 0.12)`,
                         color: `hsl(var(--lego-${COLORS[block].color}))`,
@@ -239,22 +256,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Footer / System Status */}
-      <footer className="p-4 md:p-8 border-t border-black/5 bg-white/60 backdrop-blur-xl relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-          <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4">
-            {Object.entries(COLORS).map(([name, data]) => (
-               <div key={name} className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/40 border border-black/5">
-                 <div className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full`} style={{ backgroundColor: `hsl(var(--lego-${data.color}))` }} />
-                 <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-slate-600">{data.label}</span>
-               </div>
-            ))}
-          </div>
-          <div className="text-center md:text-right mt-2 md:mt-0">
-             <p className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-slate-400">Galaxy Orchestration Engine v4.0.2</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

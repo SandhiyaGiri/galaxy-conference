@@ -17,7 +17,7 @@ function FloatingBrick({ delay, x, duration, color, size, rotate }: {
       animate={{
         y: "110vh",
         rotate,
-        x: [-30, 30, -30]
+        x: [-15, 15, -15]
       }}
       transition={{
         duration,
@@ -38,15 +38,23 @@ export default function LegoBackground() {
   const durationPool = [30, 40, 50, 60];
 
   useEffect(() => {
-    const newBricks = Array.from({ length: 45 }).map((_, i) => ({
-      id: i,
-      x: `${Math.random() * 100}%`,
-      delay: Math.random() * -durationPool[i % durationPool.length],
-      duration: 35 + Math.random() * 35,
-      color: BRICK_COLORS[Math.floor(Math.random() * BRICK_COLORS.length)],
-      size: 70 + Math.random() * 90,
-      rotate: Math.random() * 360
-    }));
+    const NUM_COLS = 9;
+    const colWidth = 100 / NUM_COLS;
+    const newBricks = Array.from({ length: 36 }).map((_, i) => {
+      const col = i % NUM_COLS;
+      const center = col * colWidth + colWidth / 2;
+      // small jitter within each column cell so bricks don't stack perfectly
+      const jitter = (Math.random() - 0.5) * colWidth * 0.5;
+      return {
+        id: i,
+        x: `${Math.max(2, Math.min(98, center + jitter))}%`,
+        delay: -(durationPool[i % durationPool.length] * Math.random()),
+        duration: 38 + Math.random() * 24,
+        color: BRICK_COLORS[i % BRICK_COLORS.length],
+        size: 60 + Math.random() * 50,
+        rotate: Math.random() * 360,
+      };
+    });
     setBricks(newBricks);
   }, []);
 

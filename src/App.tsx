@@ -157,59 +157,72 @@ export default function App() {
       </div>
 
       {/* Kiosk Header */}
-      <header className="pt-24 pb-6 md:pb-10 text-center relative z-10 px-4">
-        <motion.h1 
+      <header className="pt-16 pb-4 md:pb-6 text-center relative z-10 px-4">
+        <motion.h1
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 uppercase mb-4 drop-shadow-sm font-outfit"
+          className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 uppercase mb-3 drop-shadow-sm font-outfit"
         >
           Mix. Match. Launch.
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-lg md:text-2xl text-slate-500 font-bold uppercase tracking-widest font-outfit mb-4 md:mb-6"
+          className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-widest font-outfit mb-2"
         >
-          Build your bank's future — one block at a time. Welcome to composable banking.
-        </motion.p>
-        
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-sm md:text-lg text-slate-600 font-medium max-w-3xl mx-auto font-outfit leading-relaxed"
-        >
-          Just like LEGO bricks snap together to create anything imaginable, our Galaxy capabilities let you assemble powerful banking capabilities — piece by piece, your way. Mix. Match. Launch.
+          Build your bank's future — one block at a time.
         </motion.p>
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-20 overflow-y-auto custom-scrollbar relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-20 pt-4 md:pt-10">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-10 overflow-y-auto custom-scrollbar relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 pt-4 md:pt-6">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -10 }}
-              className="flex flex-col items-center"
+              whileHover={{ y: -6 }}
+              className="relative cursor-pointer flex flex-col"
+              style={{ paddingTop: '50px' }}
               onClick={() => setActiveId(lever.id)}
             >
-              <LegoBrick
-                color={lever.color}
-                width={220}
-                height={100}
-                studsX={4}
-                label={lever.title}
-                isHovered={true}
-                className="cursor-pointer"
-              />
-              <div className="mt-8 text-center px-4">
-                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">{lever.benefit.split(" ").slice(0, 3).join(" ")}...</p>
-                <div className="h-1 w-12 bg-black/5 mx-auto rounded-full" />
+              {/* Title brick — top-left, overlapping the card border */}
+              <div className="absolute z-10" style={{ top: '8px', left: '16px' }}>
+                <LegoBrick
+                  color={lever.color}
+                  width={185}
+                  height={80}
+                  studsX={4}
+                  label={lever.title}
+                />
+              </div>
+
+              {/* Card body — flex-1 so all cards in a row share the same height */}
+              <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '46px' }}>
+                <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-4">
+                  {lever.benefit}
+                </p>
+
+                {/* Pill tags */}
+                <div className="flex flex-wrap gap-2">
+                  {lever.blocks.map(block => (
+                    <span
+                      key={block}
+                      className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide font-outfit"
+                      style={{
+                        backgroundColor: `hsl(var(--lego-${COLORS[block].color}) / 0.12)`,
+                        color: `hsl(var(--lego-${COLORS[block].color}))`,
+                        border: `1px solid hsl(var(--lego-${COLORS[block].color}) / 0.35)`,
+                      }}
+                    >
+                      {COLORS[block].label}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

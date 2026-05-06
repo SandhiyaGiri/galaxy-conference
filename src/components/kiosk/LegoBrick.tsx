@@ -22,6 +22,7 @@ interface LegoBrickProps {
     selected?: boolean;
     isHovered?: boolean;
     label?: string;
+    labelSize?: string;
 }
 
 const colorMap: Record<BrickColor, {
@@ -131,7 +132,7 @@ const colorMap: Record<BrickColor, {
     },
 };
 
-export default function LegoBrick({ color, width, height, studsX, className, selected, isHovered, label }: LegoBrickProps) {
+export default function LegoBrick({ color, width, height, studsX, className, selected, isHovered, label, labelSize }: LegoBrickProps) {
     const colors = colorMap[color] || colorMap.purple;
 
     return (
@@ -185,7 +186,7 @@ export default function LegoBrick({ color, width, height, studsX, className, sel
             {label && (
                 <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
                     <span
-                        className="text-[18px] font-black text-center leading-tight drop-shadow-lg uppercase italic tracking-tighter"
+                        className={`${labelSize ?? "text-[18px]"} font-black text-center leading-tight drop-shadow-lg uppercase tracking-tighter`}
                         style={{
                             color: "#fff",
                             textShadow: "0 2px 4px rgba(0,0,0,0.5)",

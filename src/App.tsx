@@ -152,24 +152,24 @@ export default function App() {
   const activeLever = LEVERS.find(l => l.id === activeId);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col font-sans">
+    <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
       <LegoBackground />
 
-      {/* Brand Logo */}
-      <div className="absolute top-10 left-10 z-20">
-        <img 
-          src={finzlyLogo} 
-          alt="Finzly Logo" 
-          className="h-10 w-auto opacity-90"
-        />
+      {/* Brand Logo — desktop absolute */}
+      <div className="absolute top-10 left-10 z-20 hidden md:block">
+        <img src={finzlyLogo} alt="Finzly Logo" className="h-10 w-auto opacity-90" />
       </div>
 
       {/* Kiosk Header */}
-      <header className="pt-16 pb-4 md:pb-6 text-center relative z-10 px-4">
+      <header className="pt-6 md:pt-14 pb-4 md:pb-6 text-center relative z-10 px-4">
+        {/* Mobile logo — in-flow, centered */}
+        <div className="flex justify-center md:hidden mb-4">
+          <img src={finzlyLogo} alt="Finzly Logo" className="h-8 w-auto opacity-90" />
+        </div>
         <motion.h1
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 uppercase mb-3 drop-shadow-sm font-outfit"
+          className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 uppercase mb-3 drop-shadow-sm font-outfit"
         >
           Mix. Match. Launch.
         </motion.h1>
@@ -194,8 +194,8 @@ export default function App() {
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-10 overflow-y-auto custom-scrollbar relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 pt-4 md:pt-6">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-10 md:overflow-y-auto custom-scrollbar relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}
@@ -204,22 +204,22 @@ export default function App() {
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -6 }}
               className="relative cursor-pointer flex flex-col"
-              style={{ paddingTop: '50px' }}
+              style={{ paddingTop: '44px' }}
               onClick={() => setActiveId(lever.id)}
             >
               {/* Title brick — top-left, overlapping the card border */}
               <div className="absolute z-10" style={{ top: '8px', left: '16px' }}>
                 <LegoBrick
                   color={lever.color}
-                  width={185}
-                  height={80}
+                  width={170}
+                  height={72}
                   studsX={4}
                   label={lever.title}
                 />
               </div>
 
               {/* Card body — flex-1 so all cards in a row share the same height */}
-              <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '46px' }}>
+              <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '40px' }}>
                 <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-4">
                   {lever.benefit}
                 </p>

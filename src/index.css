@@ -60,8 +60,13 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: 'Outfit', 'Inter', sans-serif;
-  overflow: hidden; /* For Kiosk feel */
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Kiosk lock — desktop only */
+@media (min-width: 768px) {
+  body { overflow: hidden; }
 }
 
 .glass-panel {

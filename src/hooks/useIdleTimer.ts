@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 export function useIdleTimer(timeoutMs: number) {
   const [isIdle, setIsIdle] = useState(true); // start idle so animation plays on load
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const reset = () => {

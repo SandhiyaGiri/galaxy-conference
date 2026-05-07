@@ -10,12 +10,12 @@ import stevePhoto from "../../assets/steve.jpg";
 import finzlyQr from "../../assets/finzly-qr.png";
 
 const ALL_REPS: Record<string, { name: string; role: string; region: string; color: string; photo: string }> = {
-  brian:   { name: "Brian",   role: "FX & Trade Specialist", region: "Global",    color: "#1D9E75", photo: brianPhoto },
-  sam:     { name: "Sam",     role: "Enterprise Banking",     region: "Northeast", color: "#378ADD", photo: samPhoto },
-  scott:   { name: "Scott",   role: "Payments Lead",          region: "Midwest",   color: "#7F77DD", photo: scottPhoto },
-  melissa: { name: "Melissa", role: "Digital Experiences",    region: "South",     color: "#D85A30", photo: melissaPhoto },
-  chris:   { name: "Chris",   role: "Partner Banking",        region: "West",      color: "#BA7517", photo: chrisPhoto },
-  steve:   { name: "Steve T", role: "Token & Digital Assets", region: "Global",    color: "#993556", photo: stevePhoto },
+  brian: { name: "Brian", role: "FX & Trade Specialist", region: "Global", color: "#1D9E75", photo: brianPhoto },
+  sam: { name: "Sam", role: "Enterprise Banking", region: "Northeast", color: "#378ADD", photo: samPhoto },
+  scott: { name: "Scott", role: "Payments Lead", region: "Midwest", color: "#7F77DD", photo: scottPhoto },
+  melissa: { name: "Melissa", role: "Digital Experiences", region: "South", color: "#D85A30", photo: melissaPhoto },
+  chris: { name: "Chris", role: "Partner Banking", region: "West", color: "#BA7517", photo: chrisPhoto },
+  steve: { name: "Steve T", role: "Token & Digital Assets", region: "Global", color: "#993556", photo: stevePhoto },
 };
 
 interface BlueprintCardProps {
@@ -34,10 +34,10 @@ interface BlueprintCardProps {
 }
 
 const TABS = [
-  { id: "blocks",   label: "Building Blocks" },
+  { id: "blocks", label: "Building Blocks" },
   { id: "use-case", label: "How Banks Can Use It" },
   { id: "outcomes", label: "Business Outcomes" },
-  { id: "team",     label: "Speak to Sales" },
+  { id: "team", label: "Speak to Sales" },
 ];
 
 export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
@@ -82,11 +82,10 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex items-center justify-center py-2.5 md:py-3 text-xs md:text-sm font-black transition-all font-outfit border-b-2 -mb-px ${
-                activeTab === tab.id
-                  ? "border-primary text-primary"
-                  : "border-transparent text-slate-400 hover:text-slate-600"
-              }`}
+              className={`flex-1 flex items-center justify-center py-2.5 md:py-3 text-sm md:text-base font-black transition-all font-outfit border-b-2 -mb-px ${activeTab === tab.id
+                ? "border-primary text-primary"
+                : "border-transparent text-slate-400 hover:text-slate-600"
+                }`}
             >
               {tab.label}
             </button>
@@ -103,7 +102,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               animate={{ opacity: 1, x: 0 }}
               className="flex flex-col h-full"
             >
-              <p className="text-sm text-slate-600 leading-relaxed mb-4 border-l-4 border-primary pl-3 font-medium">
+              <p className="text-base text-slate-600 leading-relaxed mb-4 border-l-4 border-primary pl-3 font-normal">
                 {lever.description}
               </p>
               <div className="mt-auto pt-2">
@@ -118,7 +117,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                           {block.galaxy.charAt(0).toUpperCase() + block.galaxy.slice(1)} Galaxy
                         </span>
                         <h4 className="text-sm md:text-base font-black text-slate-900 font-outfit">{block.label}</h4>
-                        <p className="text-xs text-slate-500 font-medium max-w-[150px]">{block.sub}</p>
+                        <p className="text-sm text-slate-500 font-normal max-w-[150px]">{block.sub}</p>
                       </div>
                     </React.Fragment>
                   ))}
@@ -137,7 +136,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
           {activeTab === "use-case" && (
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
               <div className="glass-panel p-6 md:p-8 rounded-3xl bg-gradient-to-br from-white to-slate-50">
-                <p className="text-lg md:text-2xl text-slate-700 leading-relaxed md:leading-snug font-bold font-outfit">
+                <p className="text-sm md:text-xl text-slate-700 leading-relaxed md:leading-snug font-normal font-outfit">
                   {lever.howBanksUse}
                 </p>
               </div>
@@ -155,15 +154,15 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                         <div className="bg-primary/10 p-1 rounded-full border border-primary/20 shrink-0 mt-0.5">
                           <CheckCircle2 className="text-primary w-3.5 h-3.5" />
                         </div>
-                        <span className="text-sm font-semibold text-slate-700 font-outfit leading-snug">{outcome}</span>
+                        <span className="text-base font-normal text-slate-700 font-outfit leading-snug">{outcome}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="md:w-52 glass-panel p-5 rounded-2xl flex flex-col items-center justify-center gap-3 shrink-0">
                   <div className="text-center">
-                    <div className="text-sm font-black text-slate-800 font-outfit">Download the brochure</div>
-                    <div className="text-xs text-slate-500 font-outfit mt-1">Scan QR or ask your sales rep</div>
+                    <div className="text-base font-medium text-slate-800 font-outfit">Download the brochure</div>
+                    <div className="text-sm font-normal text-slate-500 font-outfit mt-1">Scan QR or ask your sales rep</div>
                   </div>
                   <div className="w-36 h-36 bg-white rounded-xl border border-slate-200 overflow-hidden p-1 shrink-0">
                     <img src={finzlyQr} alt="Finzly QR Code" className="w-full h-full object-contain" />
@@ -176,7 +175,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
           {/* Speak to Sales — intro text, larger photos, underlined footer */}
           {activeTab === "team" && (
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-              <p className="text-slate-500 text-sm mb-5 font-bold font-outfit">
+              <p className="text-slate-500 text-base mb-5 font-normal font-outfit">
                 Ready to explore {lever.title} for your bank? Our team will build your custom roadmap.
               </p>
               <div className="flex flex-wrap gap-5 justify-center mb-6">
@@ -193,15 +192,15 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                       style={{ border: `3px solid ${rep.color}` }}
                     />
                     <div className="text-center">
-                      <div className="font-black text-sm text-slate-900 font-outfit">{rep.name}</div>
-                      <div className="text-[11px] text-slate-500 leading-snug font-outfit">{rep.role}</div>
-                      <div className="text-[11px] text-slate-400 font-outfit">{rep.region}</div>
+                      <div className="font-black text-base text-slate-900 font-outfit">{rep.name}</div>
+                      <div className="text-xs text-slate-500 leading-snug font-outfit">{rep.role}</div>
+                      <div className="text-xs text-slate-400 font-outfit">{rep.region}</div>
                     </div>
                   </div>
                 ))}
               </div>
               <div className="flex justify-center">
-                <span className="text-sm font-bold font-outfit text-primary underline underline-offset-4 decoration-primary/50">
+                <span className="text-base font-normal font-outfit text-primary underline underline-offset-4 decoration-primary/50">
                   Feel free to connect
                 </span>
               </div>

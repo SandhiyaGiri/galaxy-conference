@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { X, CheckCircle2 } from "lucide-react";
+import { playTabChange, playClose } from "../../lib/sounds";
 import brianPhoto from "../../assets/brian.jpeg";
 import samPhoto from "../../assets/sam.jpg";
 import scottPhoto from "../../assets/scott.jpg";
@@ -50,7 +51,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/60"
-      onClick={onClose}
+      onClick={() => { playClose(); onClose(); }}
     >
       {/* Fixed height so modal doesn't resize between tabs */}
       <div
@@ -69,7 +70,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
             </div>
           </div>
           <button
-            onClick={onClose}
+            onClick={() => { playClose(); onClose(); }}
             className="p-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-black/5 shrink-0"
           >
             <X size={24} className="text-slate-400" />
@@ -81,7 +82,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
           {TABS.map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => { playTabChange(); setActiveTab(tab.id); }}
               className={`flex-1 flex items-center justify-center py-2.5 md:py-3 text-sm md:text-base font-black transition-all font-outfit border-b-2 -mb-px ${activeTab === tab.id
                 ? "border-primary text-primary"
                 : "border-transparent text-slate-400 hover:text-slate-600"

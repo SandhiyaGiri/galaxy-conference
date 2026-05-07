@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Zap, 
-  Users, 
-  Building2, 
-  Globe, 
-  Sparkles, 
-  Settings, 
-  TrendingUp, 
-  Coins 
+import {
+  Zap,
+  Users,
+  Building2,
+  Globe,
+  Sparkles,
+  Settings,
+  TrendingUp,
+  Coins
 } from "lucide-react";
 import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
+import { useIdleTimer } from "./hooks/useIdleTimer";
+import { playCardOpen } from "./lib/sounds";
 import finzlyLogo from "./assets/finzly-logo.png";
 
 const COLORS: Record<string, { color: BrickColor; label: string }> = {
@@ -150,6 +152,7 @@ const LEVERS = [
 export default function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const activeLever = LEVERS.find(l => l.id === activeId);
+  const isIdle = useIdleTimer(30_000);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
@@ -166,27 +169,37 @@ export default function App() {
         <div className="flex justify-center md:hidden mb-4">
           <img src={finzlyLogo} alt="Finzly Logo" className="h-8 w-auto opacity-90" />
         </div>
-        <motion.h1
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 uppercase mb-3 drop-shadow-sm font-outfit"
-        >
-          Mix. Match. Launch.
-        </motion.h1>
+        {/* Title — each word punches up individually */}
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 uppercase mb-3 drop-shadow-sm font-outfit flex flex-wrap justify-center gap-x-[0.22em]">
+          {["Mix.", "Match.", "Launch."].map((word, i) => (
+            <motion.span
+              key={word}
+              className="inline-block"
+              initial={{ opacity: 0, y: 52, rotateX: -40 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ delay: i * 0.18, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: "bottom center", display: "inline-block" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </h1>
 
+        {/* Subtitle — slides up with blur clear */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ delay: 0.62, duration: 0.55, ease: "easeOut" }}
           className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-widest font-outfit mb-1"
         >
           Build your bank's future — one block at a time.
         </motion.p>
 
+        {/* Question — springs in */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.45 }}
+          initial={{ opacity: 0, scale: 0.75 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.88, duration: 0.5, type: "spring", stiffness: 260, damping: 18 }}
           className="text-base md:text-xl text-primary font-black font-outfit tracking-tight mb-2"
         >
           What's your next growth play?
@@ -205,10 +218,21 @@ export default function App() {
               whileHover={{ y: -6 }}
               className="relative cursor-pointer flex flex-col"
               style={{ paddingTop: '44px' }}
-              onClick={() => setActiveId(lever.id)}
+              onClick={() => { playCardOpen(); setActiveId(lever.id); }}
             >
-              {/* Title brick — top-left, overlapping the card border */}
-              <div className="absolute z-10" style={{ top: '8px', left: '16px' }}>
+              {/* Title brick — bounces gently when idle */}
+              <motion.div
+                className="absolute z-10"
+                style={{ top: '8px', left: '16px' }}
+                animate={isIdle ? { y: [0, -10, 0] } : { y: 0 }}
+                transition={isIdle ? {
+                  duration: 1,
+                  delay: index * 0.15,
+                  repeat: Infinity,
+                  repeatDelay: 0.4,
+                  ease: "easeInOut",
+                } : { duration: 0.3 }}
+              >
                 <LegoBrick
                   color={lever.color}
                   width={170}
@@ -216,30 +240,30 @@ export default function App() {
                   studsX={4}
                   label={lever.title}
                 />
-              </div>
+              </motion.div>
 
               {/* Card body — flex-1 so all cards in a row share the same height */}
               <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '40px' }}>
-                <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-4">
-                  {lever.benefit}
-                </p>
+                  <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-4">
+                    {lever.benefit}
+                  </p>
 
-                {/* Pill tags */}
-                <div className="flex flex-wrap gap-2">
-                  {lever.blocks.map(block => (
-                    <span
-                      key={block}
-                      className="px-3 py-1 rounded-full text-[10px] font-black tracking-wide font-outfit"
-                      style={{
-                        backgroundColor: `hsl(var(--lego-${COLORS[block].color}) / 0.12)`,
-                        color: `hsl(var(--lego-${COLORS[block].color}))`,
-                        border: `1px solid hsl(var(--lego-${COLORS[block].color}) / 0.35)`,
-                      }}
-                    >
-                      {COLORS[block].label}
-                    </span>
-                  ))}
-                </div>
+                  {/* Pill tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {lever.blocks.map(block => (
+                      <span
+                        key={block}
+                        className="px-3 py-1 rounded-full text-[10px] font-black tracking-wide font-outfit"
+                        style={{
+                          backgroundColor: `hsl(var(--lego-${COLORS[block].color}) / 0.12)`,
+                          color: `hsl(var(--lego-${COLORS[block].color}))`,
+                          border: `1px solid hsl(var(--lego-${COLORS[block].color}) / 0.35)`,
+                        }}
+                      >
+                        {COLORS[block].label}
+                      </span>
+                    ))}
+                  </div>
               </div>
             </motion.div>
           ))}
@@ -249,9 +273,9 @@ export default function App() {
       {/* Detail View Overlay */}
       <AnimatePresence>
         {activeLever && (
-          <BlueprintCard 
-            lever={activeLever} 
-            onClose={() => setActiveId(null)} 
+          <BlueprintCard
+            lever={activeLever}
+            onClose={() => setActiveId(null)}
           />
         )}
       </AnimatePresence>

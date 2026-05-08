@@ -5,7 +5,7 @@ import { playTabChange, playClose } from "../../lib/sounds";
 import brianPhoto from "../../assets/brian.jpeg";
 import samPhoto from "../../assets/sam.jpg";
 import scottPhoto from "../../assets/scott.jpg";
-import melissaPhoto from "../../assets/melissa.webp";
+import melissaPhoto from "../../assets/melissa.jpg";
 import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
 import finzlyQr from "../../assets/finzly-qr.png";
@@ -65,8 +65,8 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               {lever.icon}
             </div>
             <div>
-              <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-slate-900 uppercase font-outfit">{lever.title}</h2>
-              <p className="text-xs md:text-sm text-slate-500 font-bold font-outfit">{lever.benefit}</p>
+              <h2 className="text-2xl md:text-4xl font-black tracking-tight text-slate-900 font-outfit leading-none">{lever.title}</h2>
+              <p className="text-xs md:text-sm text-slate-400 font-medium font-outfit mt-0.5">{lever.benefit}</p>
             </div>
           </div>
           <button

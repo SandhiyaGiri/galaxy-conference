@@ -198,7 +198,7 @@ export default function App() {
             transition={{ delay: 0.62, duration: 0.55, ease: "easeOut" }}
             className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-widest font-outfit mb-1"
           >
-            Build your bank's future — one block at a time.
+            Build your bank's future — one galaxy at a time.
           </motion.p>
 
           {/* Question — springs in */}

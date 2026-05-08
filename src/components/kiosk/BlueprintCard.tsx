@@ -123,13 +123,6 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                     </React.Fragment>
                   ))}
                 </div>
-                {lever.lego.length > 1 && (
-                  <div className="mt-4">
-                    <span className="text-xs px-4 py-1.5 rounded-full font-bold font-satoshi bg-primary/10 text-primary border border-primary/20">
-                      Snaps together seamlessly
-                    </span>
-                  </div>
-                )}
               </div>
             </motion.div>
           )}

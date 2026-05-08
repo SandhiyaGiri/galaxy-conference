@@ -206,7 +206,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.88, duration: 0.5, type: "spring", stiffness: 260, damping: 18 }}
-            className="text-base md:text-xl text-primary font-black font-outfit tracking-tight mb-2"
+            className="text-base md:text-xl text-primary font-bold font-satoshi tracking-wide mb-2"
           >
             What's your next growth play?
           </motion.p>
@@ -227,18 +227,10 @@ export default function App() {
               style={{ paddingTop: '44px' }}
               onClick={() => { playCardOpen(); setActiveId(lever.id); }}
             >
-              {/* Title brick — always bouncing */}
-              <motion.div
+              {/* Title brick — static */}
+              <div
                 className="absolute z-10"
                 style={{ top: '8px', left: '16px' }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  duration: 1,
-                  delay: index * 0.15,
-                  repeat: Infinity,
-                  repeatDelay: 0.4,
-                  ease: "easeInOut",
-                }}
               >
                 <LegoBrick
                   color={lever.color}
@@ -247,7 +239,7 @@ export default function App() {
                   studsX={4}
                   label={lever.title}
                 />
-              </motion.div>
+              </div>
 
               {/* Card body — flex-1 so all cards in a row share the same height */}
               <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '40px' }}>

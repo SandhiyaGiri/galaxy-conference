@@ -8,6 +8,7 @@ import scottPhoto from "../../assets/scott.jpg";
 import melissaPhoto from "../../assets/melissa.jpg";
 import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
+import karunaPhoto from "../../assets/karuna.jpeg";
 import finzlyQr from "../../assets/finzly-qr.png";
 
 const ALL_REPS: Record<string, { name: string; role: string; region: string; color: string; photo: string }> = {
@@ -17,6 +18,7 @@ const ALL_REPS: Record<string, { name: string; role: string; region: string; col
   melissa: { name: "Melissa", role: "Digital Experiences", region: "South", color: "#D85A30", photo: melissaPhoto },
   chris: { name: "Chris", role: "Partner Banking", region: "West", color: "#BA7517", photo: chrisPhoto },
   steve: { name: "Steve T", role: "Token & Digital Assets", region: "Global", color: "#993556", photo: stevePhoto },
+  karuna: { name: "Karuna", role: "Vice President Sales", region: "Global", color: "#4F86C6", photo: karunaPhoto },
 };
 
 interface BlueprintCardProps {
@@ -106,19 +108,21 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               <p className="text-base text-slate-600 leading-relaxed mb-4 border-l-4 border-primary pl-3 font-normal">
                 {lever.description}
               </p>
-              <div className="mt-auto pt-2">
-                <div className="flex flex-wrap items-center gap-y-3 gap-x-1">
+              <div className="mt-auto pt-6">
+                <div className="flex flex-wrap items-stretch gap-y-3 gap-x-1">
                   {lever.lego.map((block, i) => (
                     <React.Fragment key={i}>
                       {i > 0 && (
-                        <span className="text-slate-300 font-black text-xl px-1 shrink-0">+</span>
+                        <div className="flex items-center self-stretch shrink-0">
+                          <span className="text-slate-300 font-black text-xl px-1">+</span>
+                        </div>
                       )}
-                      <div className="glass-panel p-3 rounded-xl flex flex-col gap-1 luxury-shine shrink-0">
+                      <div className="glass-panel p-3 rounded-xl flex flex-col gap-1 luxury-shine shrink-0 min-w-[130px] max-w-[200px]">
                         <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-400 font-satoshi whitespace-nowrap">
                           {block.galaxy.charAt(0).toUpperCase() + block.galaxy.slice(1)} Galaxy
                         </span>
                         <h4 className="text-sm md:text-base font-black text-slate-900 font-satoshi">{block.label}</h4>
-                        <p className="text-sm text-slate-500 font-normal max-w-[150px]">{block.sub}</p>
+                        <p className="text-sm text-slate-500 font-normal">{block.sub}</p>
                       </div>
                     </React.Fragment>
                   ))}
@@ -172,12 +176,11 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               <p className="text-slate-500 text-base mb-5 font-normal font-satoshi">
                 Ready to explore {lever.title} for your bank? Our team will build your custom roadmap.
               </p>
-              <div className="flex flex-wrap gap-5 justify-center mb-6">
+              <div className="flex flex-wrap gap-5 justify-center mb-6 items-stretch">
                 {reps.map(rep => (
                   <div
                     key={rep.name}
-                    className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl"
-                    style={{ minWidth: "140px" }}
+                    className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
                   >
                     <img
                       src={rep.photo}
@@ -192,11 +195,6 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="flex justify-center">
-                <span className="text-base font-normal font-satoshi text-primary underline underline-offset-4 decoration-primary/50">
-                  Feel free to connect
-                </span>
               </div>
             </motion.div>
           )}

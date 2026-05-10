@@ -105,7 +105,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               animate={{ opacity: 1, x: 0 }}
               className="flex flex-col h-full"
             >
-              <p className="text-base text-slate-600 leading-relaxed mb-4 border-l-4 border-primary pl-3 font-normal">
+              <p className="text-base text-slate-600 leading-relaxed mb-4 border-l-4 border-slate-300 pl-3 font-normal">
                 {lever.description}
               </p>
               <div className="mt-auto pt-6">
@@ -159,7 +159,11 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                 </div>
                 <div className="md:w-52 glass-panel p-5 rounded-2xl flex flex-col items-center justify-center gap-3 shrink-0">
                   <div className="text-center">
-                    <div className="text-base font-medium text-slate-800 font-satoshi">Download the brochure</div>
+                    <div className="text-base font-medium text-slate-800 font-satoshi">
+                      {lever.title === "Trade Finance & Swaps"
+                        ? "Download Arvest Bank's case study on Trade Finance"
+                        : "Download the brochure"}
+                    </div>
                     <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">Scan QR or ask your sales rep</div>
                   </div>
                   <div className="w-36 h-36 bg-white rounded-xl border border-slate-200 overflow-hidden p-1 shrink-0">
@@ -185,13 +189,11 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                     <img
                       src={rep.photo}
                       alt={rep.name}
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover"
+                      className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover"
                       style={{ border: `3px solid ${rep.color}` }}
                     />
                     <div className="text-center">
                       <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
-                      <div className="text-xs text-slate-500 leading-snug font-satoshi">{rep.role}</div>
-                      <div className="text-xs text-slate-400 font-satoshi">{rep.region}</div>
                     </div>
                   </div>
                 ))}

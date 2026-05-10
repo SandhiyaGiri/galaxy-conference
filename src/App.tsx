@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap,
   Users,
-  Building2,
+  HandCoins,
   Globe,
-  Sparkles,
-  Settings,
-  TrendingUp,
-  Coins
+  LayoutDashboard,
+  ArrowRightLeft,
+  TrendingUp
 } from "lucide-react";
+import { EmbeddedBankingIcon, TokenizedDepositsIcon } from "./components/CustomIcons";
 import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
@@ -26,7 +25,7 @@ const COLORS: Record<string, { color: BrickColor; label: string }> = {
 
 const LEVERS = [
   {
-    id: 1, icon: <Zap size={48} />, title: "Embedded Banking",
+    id: 1, icon: <EmbeddedBankingIcon size={48} />, title: "Embedded Banking",
     color: "blue" as BrickColor,
     benefit: "New non-interest revenue from your payment infrastructure",
     blocks: ["payment", "account"],
@@ -55,7 +54,7 @@ const LEVERS = [
     reps: ["steve"],
   },
   {
-    id: 3, icon: <Building2 size={48} />, title: "Specialty Deposits",
+    id: 3, icon: <HandCoins size={48} />, title: "Specialty Deposits",
     color: "green" as BrickColor,
     benefit: "Launch vertical-specific deposit products in days",
     blocks: ["account", "token"],
@@ -84,7 +83,7 @@ const LEVERS = [
     reps: ["brian"],
   },
   {
-    id: 5, icon: <Sparkles size={48} />, title: "Digital Experiences",
+    id: 5, icon: <LayoutDashboard size={48} />, title: "Digital Experiences",
     color: "red" as BrickColor,
     benefit: "Enterprise-grade business banking UX, ready to plug into your existing stack",
     blocks: ["digital"],
@@ -100,7 +99,7 @@ const LEVERS = [
     reps: ["karuna"],
   },
   {
-    id: 6, icon: <Settings size={48} />, title: "Payment Modernization",
+    id: 6, icon: <ArrowRightLeft size={48} />, title: "Payment Modernization",
     color: "blue" as BrickColor,
     benefit: "Modernize at your pace — modular transformation, rail by rail",
     blocks: ["payment"],
@@ -132,7 +131,7 @@ const LEVERS = [
     reps: ["brian"],
   },
   {
-    id: 8, icon: <Coins size={48} />, title: "Tokenized Deposits",
+    id: 8, icon: <TokenizedDepositsIcon size={48} />, title: "Tokenized Deposits",
     color: "red" as BrickColor,
     benefit: "Future-proof your deposit strategy for the digital economy",
     blocks: ["payment", "account", "token"],

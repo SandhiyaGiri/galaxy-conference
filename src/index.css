@@ -83,10 +83,10 @@ body {
   isolation: isolate;
   background: #ffffff;
   border: 1px solid hsl(214.3 31.8% 91.4%);
-  border-top: 3px solid hsl(263.4 70% 50.4%);
+  border-top: 3px solid hsl(214.3 31.8% 88%);
   box-shadow:
-    0 32px 96px -16px rgba(76, 29, 149, 0.18),
-    0 16px 48px -12px rgba(15, 23, 42, 0.12);
+    0 32px 96px -16px rgba(15, 23, 42, 0.10),
+    0 16px 48px -12px rgba(15, 23, 42, 0.08);
 }
 
 .luxury-shine {

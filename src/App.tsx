@@ -12,7 +12,9 @@ import { EmbeddedBankingIcon, TokenizedDepositsIcon } from "./components/CustomI
 import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
+import AttractScreen from "./components/kiosk/AttractScreen";
 import { playCardOpen } from "./lib/sounds";
+import { useIdleTimer } from "./hooks/useIdleTimer";
 import finzlyLogo from "./assets/finzly-logo.png";
 
 const COLORS: Record<string, { color: BrickColor; label: string }> = {
@@ -151,6 +153,7 @@ export default function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const activeLever = LEVERS.find(l => l.id === activeId);
   const [headerCycle, setHeaderCycle] = useState(0);
+  const isIdle = useIdleTimer(10_000);
 
   useEffect(() => {
     const id = setInterval(() => setHeaderCycle(c => c + 1), 5_000);
@@ -160,6 +163,11 @@ export default function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
       <LegoBackground />
+
+      {/* Attract screen — shows on app load and after idle */}
+      <AnimatePresence>
+        {isIdle && <AttractScreen />}
+      </AnimatePresence>
 
       {/* Brand Logo — desktop absolute */}
       <div className="absolute top-10 left-10 z-20 hidden md:block">

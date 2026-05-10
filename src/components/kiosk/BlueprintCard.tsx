@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { X, CheckCircle2 } from "lucide-react";
+import { X, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { playTabChange, playClose } from "../../lib/sounds";
 import brianPhoto from "../../assets/brian.jpeg";
 import samPhoto from "../../assets/sam.jpg";
@@ -46,17 +46,31 @@ const TABS = [
 export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
   const [activeTab, setActiveTab] = React.useState("blocks");
   const reps = (lever.reps || []).map(k => ALL_REPS[k]).filter(Boolean);
+  const activeIndex = TABS.findIndex(tab => tab.id === activeTab);
+
+  const goNext = () => {
+    playTabChange();
+    setActiveTab(TABS[(activeIndex + 1) % TABS.length].id);
+  };
+
+  const goPrev = () => {
+    playTabChange();
+    setActiveTab(TABS[(activeIndex - 1 + TABS.length) % TABS.length].id);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/60"
       onClick={() => { playClose(); onClose(); }}
     >
       {/* Fixed height so modal doesn't resize between tabs */}
-      <div
+      <motion.div
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 20 }}
         className="kiosk-modal-shell w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
@@ -79,8 +93,8 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
           </button>
         </div>
 
-        {/* Tabs — underline style */}
-        <div className="flex bg-white px-4 md:px-6 border-b border-slate-200 shrink-0">
+        {/* Desktop Tabs — underline style */}
+        <div className="hidden md:flex bg-white px-4 md:px-6 border-b border-slate-200 shrink-0">
           {TABS.map(tab => (
             <button
               key={tab.id}
@@ -93,6 +107,37 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               {tab.label}
             </button>
           ))}
+        </div>
+
+        {/* Mobile Tabs — prev/next with dots */}
+        <div className="flex md:hidden items-center justify-between px-4 py-3 bg-white border-b border-slate-200 shrink-0 gap-3">
+          <button
+            onClick={goPrev}
+            className="p-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-black/5 shrink-0"
+          >
+            <ChevronLeft size={20} className="text-slate-500" />
+          </button>
+          <div className="flex flex-col items-center gap-1.5 flex-1">
+            <span className="text-sm font-black text-slate-900 font-satoshi text-center">
+              {TABS[activeIndex].label}
+            </span>
+            <div className="flex gap-1.5">
+              {TABS.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    i === activeIndex ? "bg-primary" : "bg-slate-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+          <button
+            onClick={goNext}
+            className="p-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-black/5 shrink-0"
+          >
+            <ChevronRight size={20} className="text-slate-500" />
+          </button>
         </div>
 
         {/* Content — fills remaining height */}
@@ -202,7 +247,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
           )}
 
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

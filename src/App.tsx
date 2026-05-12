@@ -13,9 +13,11 @@ import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
 import AttractScreen from "./components/kiosk/AttractScreen";
+import EmailGateModal from "./components/kiosk/EmailGateModal";
 import { playCardOpen } from "./lib/sounds";
 import { useIdleTimer } from "./hooks/useIdleTimer";
 import finzlyLogo from "./assets/finzly-logo.png";
+import tcsPdf from "./assets/tcs-tap.pdf";
 
 const COLORS: Record<string, { color: BrickColor; label: string }> = {
   payment: { color: "green", label: "Payment Galaxy" },
@@ -153,6 +155,7 @@ export default function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const activeLever = LEVERS.find(l => l.id === activeId);
   const [headerCycle, setHeaderCycle] = useState(0);
+  const [showDownloadGate, setShowDownloadGate] = useState(false);
   const isIdle = useIdleTimer(10_000);
 
   useEffect(() => {
@@ -160,9 +163,33 @@ export default function App() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("download")) {
+      setShowDownloadGate(true);
+    }
+  }, []);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
       <LegoBackground />
+
+      {/* QR scan download gate — shown when ?download param is in URL */}
+      <AnimatePresence>
+        {showDownloadGate && (
+          <EmailGateModal
+            pdfUrl={tcsPdf}
+            fileName="Finzly-Brochure.pdf"
+            title="Finzly Brochure"
+            onClose={() => {
+              setShowDownloadGate(false);
+              window.history.replaceState({}, "", window.location.pathname);
+            }}
+            dismissable={false}
+            source="qr-scan"
+          />
+        )}
+      </AnimatePresence>
 
       {/* Attract screen — shows on app load and after idle */}
       <AnimatePresence>

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { X, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, CheckCircle2, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { playTabChange, playClose } from "../../lib/sounds";
 import brianPhoto from "../../assets/brian.jpeg";
 import samPhoto from "../../assets/sam.jpg";
@@ -9,7 +10,8 @@ import melissaPhoto from "../../assets/melissa.jpg";
 import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
 import karunaPhoto from "../../assets/karuna.jpeg";
-import finzlyQr from "../../assets/finzly-qr.png";
+import tcsPdf from "../../assets/tcs-tap.pdf";
+import EmailGateModal from "./EmailGateModal";
 
 const ALL_REPS: Record<string, { name: string; role: string; region: string; color: string; photo: string }> = {
   brian: { name: "Brian", role: "FX & Trade Specialist", region: "Global", color: "#1D9E75", photo: brianPhoto },
@@ -45,8 +47,10 @@ const TABS = [
 
 export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
   const [activeTab, setActiveTab] = React.useState("blocks");
+  const [showEmailGate, setShowEmailGate] = React.useState(false);
   const reps = (lever.reps || []).map(k => ALL_REPS[k]).filter(Boolean);
   const activeIndex = TABS.findIndex(tab => tab.id === activeTab);
+  const brochureUrl = "https://galaxy-tau-two.vercel.app/?download=brochure";
 
   const goNext = () => {
     playTabChange();
@@ -206,14 +210,28 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                   <div className="text-center">
                     <div className="text-base font-medium text-slate-800 font-satoshi">
                       {lever.title === "Trade Finance & Swaps"
-                        ? "Download Arvest Bank's case study on Trade Finance"
+                        ? "Download Arvest Bank's case study"
                         : "Download the brochure"}
                     </div>
-                    <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">Scan QR or ask your sales rep</div>
+                    <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">
+                      <span className="hidden md:inline">Scan QR or ask your sales rep</span>
+                      <span className="md:hidden">Tap to get the PDF</span>
+                    </div>
                   </div>
-                  <div className="w-36 h-36 bg-white rounded-xl border border-slate-200 overflow-hidden p-1 shrink-0">
-                    <img src={finzlyQr} alt="Finzly QR Code" className="w-full h-full object-contain" />
+
+                  {/* Kiosk: dynamic QR (hidden on mobile) */}
+                  <div className="hidden md:flex w-36 h-36 bg-white rounded-xl border border-slate-200 items-center justify-center p-2 shrink-0">
+                    <QRCodeSVG value={brochureUrl} size={120} />
                   </div>
+
+                  {/* Mobile: download button (hidden on kiosk) */}
+                  <button
+                    className="md:hidden w-full flex items-center justify-center gap-2 bg-primary text-white font-black font-satoshi text-sm py-3 px-4 rounded-xl"
+                    onClick={() => setShowEmailGate(true)}
+                  >
+                    <Download size={16} />
+                    Download Brochure
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -248,6 +266,17 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
 
         </div>
       </motion.div>
+
+      {showEmailGate && (
+        <EmailGateModal
+          pdfUrl={tcsPdf}
+          fileName="Finzly-Brochure.pdf"
+          title={lever.title === "Trade Finance & Swaps" ? "Arvest Bank Case Study" : "Finzly Brochure"}
+          onClose={() => setShowEmailGate(false)}
+          dismissable={true}
+          source="mobile-button"
+        />
+      )}
     </motion.div>
   );
 }

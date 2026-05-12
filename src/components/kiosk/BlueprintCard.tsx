@@ -10,6 +10,7 @@ import melissaPhoto from "../../assets/melissa.jpg";
 import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
 import karunaPhoto from "../../assets/karuna.jpeg";
+import christianPhoto from "../../assets/christian.jpg";
 import tcsPdf from "../../assets/tcs-tap.pdf";
 import EmailGateModal from "./EmailGateModal";
 
@@ -21,6 +22,7 @@ const ALL_REPS: Record<string, { name: string; role: string; region: string; col
   chris: { name: "Chris", role: "Partner Banking", region: "West", color: "#BA7517", photo: chrisPhoto },
   steve: { name: "Steve T", role: "Token & Digital Assets", region: "Global", color: "#993556", photo: stevePhoto },
   karuna: { name: "Karuna", role: "Vice President Sales", region: "Global", color: "#4F86C6", photo: karunaPhoto },
+  christian: { name: "Christian Vega", role: "Account Executive", region: "Global", color: "#2E5C8A", photo: christianPhoto },
 };
 
 interface BlueprintCardProps {

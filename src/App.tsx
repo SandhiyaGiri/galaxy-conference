@@ -40,7 +40,7 @@ const LEVERS = [
       { galaxy: "account", label: "Accounts & Ledger", sub: "Embedded account infrastructure" },
     ],
     outcomes: ["New non-interest revenue from API licensing", "Pay-by-bank APIs for merchants and platforms", "Deeper ERP/AR-AP integrations for sticky customers", "Attract SMB and mid-market segments"],
-    reps: ["sam", "scott", "melissa", "chris"],
+    reps: ["sam", "scott", "melissa", "chris", "christian"],
   },
   {
     id: 2, icon: <Users size={48} />, title: "Partner Banking",
@@ -55,7 +55,7 @@ const LEVERS = [
       { galaxy: "digital", label: "VAM Portal", sub: "White-label recon UX" },
     ],
     outcomes: ["Launch fintech partnerships in weeks not months", "Earn fee income on every partner transaction", "No middleware or BaaS platform cost", "Real-time reconciliation for all partners"],
-    reps: ["steve"],
+    reps: ["steve", "christian"],
   },
   {
     id: 3, icon: <HandCoins size={48} />, title: "Specialty Deposits",
@@ -100,7 +100,7 @@ const LEVERS = [
       { galaxy: "digital", label: "Consumer Payments", sub: "Wires and instant payments" },
     ],
     outcomes: ["Match the largest bank digital experiences", "Already in the Q2 and broader digital banking ecosystem", "Pay-by-bank — no card rails, lower cost", "White-label partner VAM portal for fintechs under your brand"],
-    reps: ["karuna"],
+    reps: ["karuna", "christian"],
   },
   {
     id: 6, icon: <ArrowRightLeft size={48} />, title: "Payment Modernization",
@@ -118,7 +118,7 @@ const LEVERS = [
       { galaxy: "payment", label: "Payment Orchestration", sub: "Route across all rails" },
     ],
     outcomes: ["Modular transformation — surround and shrink legacy core", "Unify all rails under one engine", "Pure orchestration for incumbents — no rip and replace", "Battle-tested scalability for high-volume, mission-critical payment processing"],
-    reps: ["brian", "sam", "scott", "melissa", "chris", "steve", "karuna"],
+    reps: ["brian", "sam", "scott", "melissa", "chris", "steve", "karuna", "christian"],
   },
   {
     id: 7, icon: <TrendingUp size={48} />, title: "Trade Finance & Swaps",

@@ -34,9 +34,20 @@ export default function EmailGateModal({
     }
     setError("");
 
+    const lead = { email, timestamp: new Date().toISOString(), source };
+
     const leads = JSON.parse(localStorage.getItem("finzly_leads") || "[]");
-    leads.push({ email, timestamp: new Date().toISOString(), source });
+    leads.push(lead);
     localStorage.setItem("finzly_leads", JSON.stringify(leads));
+
+    const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead),
+      }).catch(() => {});
+    }
 
     const a = document.createElement("a");
     a.href = pdfUrl;

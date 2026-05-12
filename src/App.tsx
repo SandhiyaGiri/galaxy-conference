@@ -156,7 +156,8 @@ export default function App() {
   const activeLever = LEVERS.find(l => l.id === activeId);
   const [headerCycle, setHeaderCycle] = useState(0);
   const [showDownloadGate, setShowDownloadGate] = useState(false);
-  const isIdle = useIdleTimer(10_000);
+  const isIdle = useIdleTimer(30_000);
+  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     const id = setInterval(() => setHeaderCycle(c => c + 1), 5_000);
@@ -193,7 +194,7 @@ export default function App() {
 
       {/* Attract screen — shows on app load and after idle */}
       <AnimatePresence>
-        {isIdle && <AttractScreen />}
+        {isIdle && !isMobile && <AttractScreen />}
       </AnimatePresence>
 
       {/* Brand Logo — desktop absolute */}

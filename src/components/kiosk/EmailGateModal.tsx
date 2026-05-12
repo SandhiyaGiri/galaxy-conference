@@ -46,7 +46,7 @@ export default function EmailGateModal({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lead),
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
     const a = document.createElement("a");
@@ -121,7 +121,7 @@ export default function EmailGateModal({
                 className="flex flex-col gap-4"
               >
                 <p className="text-sm text-slate-500 font-satoshi leading-relaxed">
-                  Enter your email to download the PDF. It will start immediately.
+                  Enter your email to download the PDF.
                 </p>
                 <div className="flex flex-col gap-1.5">
                   <div className="glass-panel flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 bg-white focus-within:border-primary/50 transition-colors">

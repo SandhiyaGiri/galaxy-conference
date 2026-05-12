@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Users,
-  HandCoins,
-  Globe,
-  LayoutDashboard,
-  ArrowRightLeft,
-  TrendingUp
-} from "lucide-react";
-import { EmbeddedBankingIcon, TokenizedDepositsIcon } from "./components/CustomIcons";
+import { ToggleRight } from "lucide-react";
 import LegoBackground from "./components/kiosk/LegoBackground";
 import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
@@ -19,8 +11,8 @@ import { useIdleTimer } from "./hooks/useIdleTimer";
 import finzlyLogo from "./assets/finzly-logo.png";
 import tcsPdf from "./assets/tcs-tap.pdf";
 
-const COLORS: Record<string, { color: BrickColor; label: string }> = {
-  payment: { color: "green", label: "Payment Galaxy" },
+const COLORS: Record<string, { color: BrickColor; label: string; textColor?: string }> = {
+  payment: { color: "green", label: "Payment Galaxy", textColor: "hsl(145, 80%, 22%)" },
   account: { color: "blue", label: "Account Galaxy" },
   trade: { color: "orange", label: "Trade Galaxy" },
   digital: { color: "purple", label: "Digital Galaxy" },
@@ -29,7 +21,7 @@ const COLORS: Record<string, { color: BrickColor; label: string }> = {
 
 const LEVERS = [
   {
-    id: 1, icon: <EmbeddedBankingIcon size={48} />, title: "Embedded Banking",
+    id: 1, icon: <ToggleRight size={48} />, title: "Embedded Banking",
     color: "blue" as BrickColor,
     benefit: "New non-interest revenue from your payment infrastructure",
     blocks: ["payment", "account"],
@@ -43,7 +35,7 @@ const LEVERS = [
     reps: ["sam", "scott", "melissa", "chris", "christian"],
   },
   {
-    id: 2, icon: <Users size={48} />, title: "Partner Banking",
+    id: 2, icon: <ToggleRight size={48} />, title: "Partner Banking",
     color: "purple" as BrickColor,
     benefit: "Power the fintech ecosystem under your brand — no middleware, no BaaS platform cost",
     blocks: ["payment", "account", "digital"],
@@ -58,7 +50,7 @@ const LEVERS = [
     reps: ["steve", "christian"],
   },
   {
-    id: 3, icon: <HandCoins size={48} />, title: "Specialty Deposits",
+    id: 3, icon: <ToggleRight size={48} />, title: "Specialty Deposits",
     color: "green" as BrickColor,
     benefit: "Launch vertical-specific deposit products in days",
     blocks: ["account", "token"],
@@ -72,7 +64,7 @@ const LEVERS = [
     reps: ["sam", "scott", "melissa", "chris"],
   },
   {
-    id: 4, icon: <Globe size={48} />, title: "FX & International",
+    id: 4, icon: <ToggleRight size={48} />, title: "FX & International",
     color: "orange" as BrickColor,
     benefit: "Compete with money-center banks on FX revenue",
     blocks: ["trade", "payment"],
@@ -87,7 +79,7 @@ const LEVERS = [
     reps: ["brian"],
   },
   {
-    id: 5, icon: <LayoutDashboard size={48} />, title: "Digital Experiences",
+    id: 5, icon: <ToggleRight size={48} />, title: "Digital Experiences",
     color: "red" as BrickColor,
     benefit: "Enterprise-grade business banking UX, ready to plug into your existing stack",
     blocks: ["digital"],
@@ -103,7 +95,7 @@ const LEVERS = [
     reps: ["karuna", "christian"],
   },
   {
-    id: 6, icon: <ArrowRightLeft size={48} />, title: "Payment Modernization",
+    id: 6, icon: <ToggleRight size={48} />, title: "Payment Modernization",
     color: "blue" as BrickColor,
     benefit: "Modernize at your pace — modular transformation, rail by rail",
     blocks: ["payment"],
@@ -121,7 +113,7 @@ const LEVERS = [
     reps: ["brian", "sam", "scott", "melissa", "chris", "steve", "karuna", "christian"],
   },
   {
-    id: 7, icon: <TrendingUp size={48} />, title: "Trade Finance & Swaps",
+    id: 7, icon: <ToggleRight size={48} />, title: "Trade Finance & Swaps",
     color: "orange" as BrickColor,
     benefit: "Retain complex deals you'd previously refer out",
     blocks: ["trade"],
@@ -135,7 +127,7 @@ const LEVERS = [
     reps: ["brian"],
   },
   {
-    id: 8, icon: <TokenizedDepositsIcon size={48} />, title: "Tokenized Deposits",
+    id: 8, icon: <ToggleRight size={48} />, title: "Tokenized Deposits",
     color: "red" as BrickColor,
     benefit: "Future-proof your deposit strategy for the digital economy",
     blocks: ["payment", "account", "token"],
@@ -156,7 +148,7 @@ export default function App() {
   const activeLever = LEVERS.find(l => l.id === activeId);
   const [headerCycle, setHeaderCycle] = useState(0);
   const [showDownloadGate, setShowDownloadGate] = useState(false);
-  const isIdle = useIdleTimer(30_000);
+  const isIdle = useIdleTimer(60_000);
   const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
@@ -249,8 +241,8 @@ export default function App() {
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 pb-10 md:overflow-y-auto custom-scrollbar relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
+      <main className="flex-1 max-w-[1500px] mx-auto w-full px-4 md:px-10 pb-10 md:overflow-y-auto custom-scrollbar relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}
@@ -287,11 +279,10 @@ export default function App() {
                   {lever.blocks.map(block => (
                     <span
                       key={block}
-                      className="px-3 py-1 rounded-full text-[10px] font-black tracking-wide font-outfit"
+                      className="px-3 py-1 rounded-full text-[10px] font-black tracking-wider font-outfit uppercase"
                       style={{
                         backgroundColor: `hsl(var(--lego-${COLORS[block].color}) / 0.12)`,
-                        color: `hsl(var(--lego-${COLORS[block].color}))`,
-                        border: `1px solid hsl(var(--lego-${COLORS[block].color}) / 0.35)`,
+                        color: COLORS[block].textColor ?? `hsl(var(--lego-${COLORS[block].color}))`,
                       }}
                     >
                       {COLORS[block].label}

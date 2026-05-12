@@ -186,7 +186,7 @@ export default function LegoBrick({ color, width, height, studsX, className, sel
             {label && (
                 <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
                     <span
-                        className={`${labelSize ?? "text-[18px]"} font-bold text-center leading-tight drop-shadow-lg tracking-tight font-satoshi`}
+                        className={`${labelSize ?? "text-[18px]"} font-bold text-center leading-tight drop-shadow-lg tracking-wide font-satoshi`}
                         style={{
                             color: "#fff",
                             textShadow: "0 2px 4px rgba(0,0,0,0.5)",

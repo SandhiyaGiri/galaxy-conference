@@ -168,9 +168,9 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                           <span className="text-slate-300 font-black text-xl px-1">+</span>
                         </div>
                       )}
-                      <div className="glass-panel p-3 rounded-xl flex flex-col gap-1 luxury-shine shrink-0 min-w-[130px] max-w-[200px]">
-                        <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-400 font-satoshi whitespace-nowrap">
-                          {block.galaxy.charAt(0).toUpperCase() + block.galaxy.slice(1)} Galaxy
+                      <div className="bg-white p-3 rounded-xl flex flex-col gap-1 luxury-shine shrink-0 min-w-[130px] max-w-[200px]">
+                        <span className="text-[8px] font-semibold uppercase tracking-[0.42em] text-slate-400 font-inter whitespace-nowrap">
+                          {block.galaxy} Galaxy
                         </span>
                         <h4 className="text-sm md:text-base font-black text-slate-900 font-satoshi">{block.label}</h4>
                         <p className="text-sm text-slate-500 font-normal">{block.sub}</p>
@@ -255,7 +255,6 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                       src={rep.photo}
                       alt={rep.name}
                       className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover"
-                      style={{ border: `3px solid ${rep.color}` }}
                     />
                     <div className="text-center">
                       <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>

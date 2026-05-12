@@ -121,7 +121,7 @@ export default function EmailGateModal({
                 className="flex flex-col gap-4"
               >
                 <p className="text-sm text-slate-500 font-satoshi leading-relaxed">
-                  Enter your email to download the PDF.
+                  Enter your official email to download the PDF.
                 </p>
                 <div className="flex flex-col gap-1.5">
                   <div className="glass-panel flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 bg-white focus-within:border-primary/50 transition-colors">
@@ -144,7 +144,7 @@ export default function EmailGateModal({
                   className="w-full flex items-center justify-center gap-2 bg-primary text-white font-black font-satoshi text-sm py-3.5 px-4 rounded-xl hover:bg-primary/90 transition-colors"
                 >
                   <Download size={16} />
-                  Download Now
+                  Download now
                 </button>
               </motion.form>
             )}

@@ -131,9 +131,8 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
               {TABS.map((_, i) => (
                 <div
                   key={i}
-                  className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                    i === activeIndex ? "bg-primary" : "bg-slate-300"
-                  }`}
+                  className={`w-1.5 h-1.5 rounded-full transition-colors ${i === activeIndex ? "bg-primary" : "bg-slate-300"
+                    }`}
                 />
               ))}
             </div>
@@ -217,7 +216,6 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                     </div>
                     <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">
                       <span className="hidden md:inline">Scan QR or ask your sales rep</span>
-                      <span className="md:hidden">Tap to get the PDF</span>
                     </div>
                   </div>
 

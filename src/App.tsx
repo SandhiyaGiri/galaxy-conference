@@ -32,7 +32,7 @@ const LEVERS = [
       { galaxy: "account", label: "Accounts & Ledger", sub: "Embedded account infrastructure" },
     ],
     outcomes: ["New non-interest revenue from API licensing", "Pay-by-bank APIs for merchants and platforms", "Deeper ERP/AR-AP integrations for sticky customers", "Attract SMB and mid-market segments"],
-    reps: ["sam", "scott", "melissa", "chris", "christian"],
+    reps: ["steve"],
   },
   {
     id: 2, icon: <ToggleRight size={48} />, title: "Partner Banking",

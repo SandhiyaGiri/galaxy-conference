@@ -74,7 +74,7 @@ export default function AttractScreen() {
               {phase >= 2 && !dismissed && (
                 <motion.div
                   key="text-content"
-                  className="text-center text-white px-8 max-w-3xl"
+                  className="text-center text-white px-8 max-w-5xl"
                   style={{ perspective: "800px" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -82,7 +82,7 @@ export default function AttractScreen() {
                   transition={{ duration: 0.5 }}
                 >
                   {/* Mix. Match. Launch. */}
-                  <h1 className="text-5xl md:text-7xl font-black font-satoshi leading-tight mb-6">
+                  <h1 className="text-5xl md:text-7xl font-black font-outfit tracking-tighter uppercase mb-6 flex justify-center gap-x-[0.22em]">
                     {["Mix.", "Match.", "Launch."].map((word, i) => (
                       <motion.span
                         key={word}
@@ -94,7 +94,7 @@ export default function AttractScreen() {
                           duration: 0.55,
                           ease: easeOut,
                         }}
-                        style={{ transformOrigin: "bottom center", display: "inline-block", marginRight: "0.2em" }}
+                        style={{ transformOrigin: "bottom center" }}
                       >
                         {word}
                       </motion.span>
@@ -103,7 +103,7 @@ export default function AttractScreen() {
 
                   {/* Subtitle */}
                   <motion.p
-                    className="text-xl md:text-2xl font-satoshi font-normal leading-snug mb-8"
+                    className="text-xl md:text-2xl font-outfit font-bold uppercase tracking-widest mb-8"
                     initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{ delay: 0.6, duration: 0.6, ease: easeOut }}
@@ -113,7 +113,7 @@ export default function AttractScreen() {
 
                   {/* Question */}
                   <motion.p
-                    className="text-lg md:text-xl font-satoshi font-normal mb-12"
+                    className="text-lg md:text-xl font-satoshi font-bold tracking-wide mb-12"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.2, type: "spring", stiffness: 100, damping: 12 }}
@@ -123,7 +123,7 @@ export default function AttractScreen() {
 
                   {/* Tap hint */}
                   <motion.p
-                    className="text-sm font-satoshi opacity-75"
+                    className="text-sm font-outfit opacity-75"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.7, duration: 0.5 }}

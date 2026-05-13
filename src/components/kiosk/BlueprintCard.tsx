@@ -53,6 +53,8 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
   const reps = (lever.reps || []).map(k => ALL_REPS[k]).filter(Boolean);
   const activeIndex = TABS.findIndex(tab => tab.id === activeTab);
   const brochureUrl = "https://galaxy-tau-two.vercel.app/?download=brochure";
+  const tradePdfUrl = import.meta.env.VITE_TRADE_PDF_URL || tcsPdf;
+  const isTradeFinance = lever.title === "Trade Finance & Swaps";
 
   const goNext = () => {
     playTabChange();
@@ -268,12 +270,12 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
 
       {showEmailGate && (
         <EmailGateModal
-          pdfUrl={tcsPdf}
-          fileName="Finzly-Brochure.pdf"
-          title={lever.title === "Trade Finance & Swaps" ? "Arvest Bank Case Study" : "Finzly Brochure"}
+          pdfUrl={isTradeFinance ? tradePdfUrl : tcsPdf}
+          fileName={isTradeFinance ? "Finzly-Trade-Finance-Case-Study.pdf" : "Finzly-Brochure.pdf"}
+          title={isTradeFinance ? "Arvest Bank Case Study" : "Finzly Brochure"}
           onClose={() => setShowEmailGate(false)}
           dismissable={true}
-          source="mobile-button"
+          source={isTradeFinance ? "mobile-button-trade-finance" : "mobile-button"}
         />
       )}
     </motion.div>

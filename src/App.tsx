@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ToggleRight } from "lucide-react";
 import LegoBackground from "./components/kiosk/LegoBackground";
@@ -147,14 +147,31 @@ export default function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const activeLever = LEVERS.find(l => l.id === activeId);
   const [headerCycle, setHeaderCycle] = useState(0);
+  const [entryKey, setEntryKey] = useState(0);
   const [showDownloadGate, setShowDownloadGate] = useState(false);
-  const isIdle = useIdleTimer(60_000);
+  const isIdle = useIdleTimer(120_000);
   const isMobile = window.innerWidth < 768;
+  const wasIdle = useRef(false);
 
   useEffect(() => {
     const id = setInterval(() => setHeaderCycle(c => c + 1), 5_000);
     return () => clearInterval(id);
   }, []);
+
+  // When attract screen dismisses, replay card + header entrance animations
+  // with a delay so they start appearing as the attract screen fades out.
+  useEffect(() => {
+    if (isIdle) {
+      wasIdle.current = true;
+    } else if (wasIdle.current) {
+      wasIdle.current = false;
+      const t = setTimeout(() => {
+        setEntryKey(k => k + 1);
+        setHeaderCycle(c => c + 1);
+      }, 600);
+      return () => clearTimeout(t);
+    }
+  }, [isIdle]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -242,7 +259,7 @@ export default function App() {
 
       {/* 3D Lego Grid */}
       <main className="flex-1 max-w-[1500px] mx-auto w-full px-4 md:px-10 pb-10 md:overflow-y-auto custom-scrollbar relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
+        <div key={entryKey} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}

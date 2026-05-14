@@ -155,7 +155,7 @@ const LEVERS = [
   {
     id: 9, icon: <ToggleRight size={48} />, title: "Derivatives",
     color: "gold" as BrickColor,
-    benefit: "Future-proof your deposit strategy for the digital economy",
+    benefit: "Integrated hedging solutions across FX, rates and more.",
     blocks: ["trade"],
     description: "Banks can use derivatives on Finzly to deliver integrated hedging (FX, rates) within client workflows, enabling seamless, end-to-end treasury services from a single platform.",
     howBanksUse: "Banks can use derivatives on Finzly to offer integrated hedging solutions—across FX, rates, and more—embedded directly into client workflows, helping corporates manage risk while deepening treasury relationships. Finzly’s derivatives capability enables banks to originate, price, execute, and manage a full range of hedging products from a single platform, seamlessly integrated with FX and trade finance for end-to-end treasury services.",

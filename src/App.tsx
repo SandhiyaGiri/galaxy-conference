@@ -105,7 +105,7 @@ const LEVERS = [
   },
   {
     id: 6, icon: <ToggleRight size={48} />, title: "Payment Modernization",
-    color: "blue" as BrickColor,
+    color: "lightblue" as BrickColor,
     benefit: "Modernize at your pace — modular transformation, rail by rail",
     blocks: ["payment"],
     description: "More than a hub, Payment Galaxy is a modular, end-to-end payments processing platform, delivering unified orchestration across both fiat and tokenized rails. Each rail is an independent building block: adopt one, combine many, or use it purely for orchestration. It’s an award-winning engine at the core of modern payments.",
@@ -124,7 +124,7 @@ const LEVERS = [
   },
   {
     id: 7, icon: <ToggleRight size={48} />, title: "Trade Finance",
-    color: "orange" as BrickColor,
+    color: "brown" as BrickColor,
     benefit: "Retain complex deals you'd previously refer out",
     blocks: ["trade"],
     description: "EXIM STAR and SWAP STAR from Trade Galaxy let you offer letters of credit, bank guarantees — revenue streams previously only available to large banks.",
@@ -138,7 +138,7 @@ const LEVERS = [
   },
   {
     id: 8, icon: <ToggleRight size={48} />, title: "Tokenized Deposits",
-    color: "red" as BrickColor,
+    color: "grey" as BrickColor,
     benefit: "Future-proof your deposit strategy for the digital economy",
     blocks: ["payment", "account", "token"],
     description: "Token Galaxy enables banks to actively participate in the tokenized economy. It leverages components of Payment Galaxy to orchestrate unified fiat and tokenized rails, while Account Galaxy provides a single, unified ledger for both fiat and tokenized assets. Together, they deliver the orchestration and infrastructure required to issue, move, and manage tokenized money at scale",
@@ -152,6 +152,20 @@ const LEVERS = [
     reps: ["steve"],
     brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf", name: "Token Galaxy - Finzly.pdf" },
   },
+  {
+    id: 9, icon: <ToggleRight size={48} />, title: "Derivatives",
+    color: "gold" as BrickColor,
+    benefit: "Future-proof your deposit strategy for the digital economy",
+    blocks: ["trade"],
+    description: "Banks can use derivatives on Finzly to deliver integrated hedging (FX, rates) within client workflows, enabling seamless, end-to-end treasury services from a single platform.",
+    howBanksUse: "Banks can use derivatives on Finzly to offer integrated hedging solutions—across FX, rates, and more—embedded directly into client workflows, helping corporates manage risk while deepening treasury relationships. Finzly’s derivatives capability enables banks to originate, price, execute, and manage a full range of hedging products from a single platform, seamlessly integrated with FX and trade finance for end-to-end treasury services.",
+    lego: [
+      { galaxy: "trade", label: "SWAP STAR", sub: "IRS, CDS, structured products" },
+    ],
+    outcomes: ["Grow new revenue with integrated derivatives alongside FX and trade", "Grow treasury relationships by offering end-to-end hedging solutions", "Increase wallet share through a single, unified client platform", "Simplify operations by managing FX, trade, and derivatives in one system"],
+    reps: ["brian"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf", name: "Token Galaxy - Finzly.pdf" },
+  }
 ];
 
 function recordDownload(email: string, leverTitle: string, brochureName: string, source: string) {
@@ -286,7 +300,7 @@ export default function App() {
       </div>
 
       {/* Kiosk Header */}
-      <header className="pt-6 md:pt-14 pb-4 md:pb-6 text-center relative z-10 px-4">
+      <header className="pt-4 md:pt-8 pb-2 md:pb-4 text-center relative z-10 px-4">
         {/* Mobile logo — in-flow, centered */}
         <div className="flex justify-center md:hidden mb-4">
           <img src={finzlyLogo} alt="Finzly Logo" className="h-8 w-auto opacity-90" />
@@ -332,8 +346,8 @@ export default function App() {
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-[1500px] mx-auto w-full px-4 md:px-10 pb-10 md:overflow-y-auto custom-scrollbar relative z-10">
-        <div key={entryKey} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-y-14 pt-4 md:pt-6">
+      <main className="flex-1 max-w-[1080px] mx-auto w-full px-6 md:px-10 pb-4 overflow-hidden relative z-10">
+        <div key={entryKey} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-7 pt-2 md:pt-3">
           {LEVERS.map((lever, index) => (
             <motion.div
               key={lever.id}
@@ -360,8 +374,8 @@ export default function App() {
               </div>
 
               {/* Card body — flex-1 so all cards in a row share the same height */}
-              <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-5" style={{ paddingTop: '40px' }}>
-                <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-4">
+              <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl px-5 pb-3" style={{ paddingTop: '36px' }}>
+                <p className="flex-1 text-sm text-slate-600 leading-relaxed font-medium font-outfit mb-2">
                   {lever.benefit}
                 </p>
 

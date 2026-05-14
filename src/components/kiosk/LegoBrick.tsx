@@ -11,7 +11,10 @@ export type BrickColor =
     | "black"
     | "bronze"
     | "silver"
-    | "gold";
+    | "gold"
+    | "lightblue"
+    | "brown"
+    | "grey";
 
 interface LegoBrickProps {
     color: BrickColor;
@@ -129,6 +132,31 @@ const colorMap: Record<BrickColor, {
         bottom: "hsl(215, 25%, 45%)",
         studTop: "hsl(215, 25%, 70%)",
         shiny: "rgba(255,255,255,0.3)",
+    },
+    lightblue: {
+        main: "hsl(195, 75%, 60%)",
+        top: "hsl(195, 75%, 72%)",
+        side: "hsl(195, 75%, 48%)",
+        bottom: "hsl(195, 75%, 36%)",
+        studTop: "hsl(195, 75%, 65%)",
+        shiny: "rgba(255,255,255,0.4)",
+        glow: "rgba(14, 165, 233, 0.5)",
+    },
+    brown: {
+        main: "hsl(28, 65%, 38%)",
+        top: "hsl(28, 65%, 50%)",
+        side: "hsl(28, 65%, 28%)",
+        bottom: "hsl(28, 65%, 20%)",
+        studTop: "hsl(28, 65%, 44%)",
+        shiny: "rgba(255,255,255,0.3)",
+    },
+    grey: {
+        main: "hsl(220, 10%, 52%)",
+        top: "hsl(220, 10%, 63%)",
+        side: "hsl(220, 10%, 42%)",
+        bottom: "hsl(220, 10%, 32%)",
+        studTop: "hsl(220, 10%, 57%)",
+        shiny: "rgba(255,255,255,0.25)",
     },
 };
 

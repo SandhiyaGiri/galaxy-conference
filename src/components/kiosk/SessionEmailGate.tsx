@@ -34,7 +34,7 @@ export default function SessionEmailGate({ onEmailCaptured, pendingDownloadId }:
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lead),
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
     setSubmitted(true);
@@ -55,8 +55,8 @@ export default function SessionEmailGate({ onEmailCaptured, pendingDownloadId }:
       </h2>
       <p className="text-sm text-slate-500 font-satoshi text-center mb-8 leading-relaxed">
         {pendingDownloadId
-          ? "Enter your work email to download the brochure and explore our solutions."
-          : "Enter your work email to explore and download Finzly brochures."}
+          ? "Enter your official email to continue the application"
+          : "Enter your official email to access the brochures."}
       </p>
 
       <AnimatePresence mode="wait">

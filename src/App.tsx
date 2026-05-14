@@ -130,8 +130,7 @@ const LEVERS = [
     description: "EXIM STAR and SWAP STAR from Trade Galaxy let you offer letters of credit, bank guarantees — revenue streams previously only available to large banks.",
     howBanksUse: "Banks can use Finzly's trade finance capabilities to digitize and streamline end-to-end trade workflows, reducing manual processing, improving turnaround times, and enhancing client experience. When combined with FX services, it enables banks to offer integrated, sticky treasury solutions that deepen client relationships and increase wallet share.",
     lego: [
-      { galaxy: "trade", label: "EXIM STAR", sub: "LCs, guarantees, collections" },
-      { galaxy: "trade", label: "SWAP STAR", sub: "IRS, CDS, structured products" },
+      { galaxy: "trade", label: "EXIM STAR", sub: "LCs, guarantees, collections" }
     ],
     outcomes: ["Boost fee revenue with higher trade and FX volumes", "Drive client growth through integrated treasury offerings", "Increase wallet share by embedding into daily client flows", "Lower costs via automation and fewer manual touchpoints"],
     reps: ["brian"],

@@ -4,20 +4,20 @@ import { X, Download, Mail } from "lucide-react";
 
 interface EmailGateModalProps {
   pdfUrl: string;
-  fileName: string;
   title?: string;
   onClose: () => void;
   dismissable?: boolean;
   source?: string;
+  onEmailCaptured?: (email: string) => void;
 }
 
 export default function EmailGateModal({
   pdfUrl,
-  fileName,
   title = "Finzly Brochure",
   onClose,
   dismissable = true,
   source = "unknown",
+  onEmailCaptured,
 }: EmailGateModalProps) {
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState("");
@@ -33,6 +33,7 @@ export default function EmailGateModal({
       return;
     }
     setError("");
+    onEmailCaptured?.(email);
 
     const lead = { email, timestamp: new Date().toISOString(), source };
 
@@ -49,12 +50,7 @@ export default function EmailGateModal({
       }).catch(() => { });
     }
 
-    const a = document.createElement("a");
-    a.href = pdfUrl;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    window.open(pdfUrl, '_blank');
 
     setSubmitted(true);
     setTimeout(onClose, 2000);
@@ -109,8 +105,8 @@ export default function EmailGateModal({
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/20">
                   <Download size={22} className="text-primary" />
                 </div>
-                <div className="text-base font-black text-slate-900 font-satoshi">Download started!</div>
-                <div className="text-sm text-slate-500 font-satoshi">Check your downloads folder.</div>
+                <div className="text-base font-black text-slate-900 font-satoshi">Opening your PDF!</div>
+                <div className="text-sm text-slate-500 font-satoshi">It's opening in a new tab.</div>
               </motion.div>
             ) : (
               <motion.form

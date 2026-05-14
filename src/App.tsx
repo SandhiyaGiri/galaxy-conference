@@ -6,10 +6,14 @@ import LegoBrick, { type BrickColor } from "./components/kiosk/LegoBrick";
 import BlueprintCard from "./components/kiosk/BlueprintCard";
 import AttractScreen from "./components/kiosk/AttractScreen";
 import EmailGateModal from "./components/kiosk/EmailGateModal";
+import SessionEmailGate from "./components/kiosk/SessionEmailGate";
 import { playCardOpen } from "./lib/sounds";
 import { useIdleTimer } from "./hooks/useIdleTimer";
 import finzlyLogo from "./assets/finzly-logo.png";
-import tcsPdf from "./assets/tcs-tap.pdf";
+const BROCHURE_FX_URL = import.meta.env.VITE_BROCHURE_FX_URL ||
+  "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/2025/Case%20Studies/Umpqua%20Bank%20Case%20Study.pdf";
+const BROCHURE_TRADE_URL = import.meta.env.VITE_BROCHURE_TRADE_URL ||
+  "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/2025/Case%20Studies/Arvest%20Case%20study.pdf";
 
 const COLORS: Record<string, { color: BrickColor; label: string; textColor?: string }> = {
   payment: { color: "green", label: "Payment Galaxy", textColor: "hsl(145, 80%, 22%)" },
@@ -33,6 +37,7 @@ const LEVERS = [
     ],
     outcomes: ["New non-interest revenue from API licensing", "Pay-by-bank APIs for merchants and platforms", "Deeper ERP/AR-AP integrations for sticky customers", "Attract SMB and mid-market segments"],
     reps: ["steve"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Embedded%20Banking%20-%20Finzly.pdf", name: "Embedded Banking - Finzly.pdf" },
   },
   {
     id: 2, icon: <ToggleRight size={48} />, title: "Partner Banking",
@@ -48,6 +53,7 @@ const LEVERS = [
     ],
     outcomes: ["Launch fintech partnerships in weeks not months", "Earn fee income on every partner transaction", "No middleware or BaaS platform cost", "Real-time reconciliation for all partners"],
     reps: ["steve", "christian"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Partner%20Banking%20-%20Finzly.pdf", name: "Partner Banking - Finzly.pdf" },
   },
   {
     id: 3, icon: <ToggleRight size={48} />, title: "Specialty Deposits",
@@ -62,6 +68,7 @@ const LEVERS = [
     ],
     outcomes: ["Launch IOLTA, escrow, class action, fintech accounts in days", "POBO/COBO service — payments and collections on behalf of clients", "Collections + payment automation with reconciliation", "Tokenized deposit accounts for institutional clients via Token Galaxy"],
     reps: ["sam", "scott", "melissa", "chris"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Specialty%20deposits%20-%20Finzly.pdf", name: "Specialty deposits - Finzly.pdf" },
   },
   {
     id: 4, icon: <ToggleRight size={48} />, title: "FX & International",
@@ -77,6 +84,7 @@ const LEVERS = [
     ],
     outcomes: ["New FX fee revenue from commercial clients", "Multi-currency accounts for international businesses", "Advanced FX instruments — compete with money-center banks", "Full international rails execution via Payment Galaxy"],
     reps: ["brian"],
+    brochure: { url: BROCHURE_FX_URL, name: "Umpqua Bank Case Study.pdf" },
   },
   {
     id: 5, icon: <ToggleRight size={48} />, title: "Digital Experiences",
@@ -93,6 +101,7 @@ const LEVERS = [
     ],
     outcomes: ["Match the largest bank digital experiences", "Already in the Q2 and broader digital banking ecosystem", "Pay-by-bank — no card rails, lower cost", "White-label partner VAM portal for fintechs under your brand"],
     reps: ["karuna", "christian"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Integrated%20payables%20-%20Finzly.pdf", name: "Digital Galaxy - Finzly.pdf" },
   },
   {
     id: 6, icon: <ToggleRight size={48} />, title: "Payment Modernization",
@@ -111,6 +120,7 @@ const LEVERS = [
     ],
     outcomes: ["Modular transformation — surround and shrink legacy core", "Unify all rails under one engine", "Pure orchestration for incumbents — no rip and replace", "Battle-tested scalability for high-volume, mission-critical payment processing"],
     reps: ["brian", "sam", "scott", "melissa", "chris", "steve", "karuna", "christian"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Payment%20Galaxy%20-%20Finzly.pdf", name: "Payment Galaxy - Finzly.pdf" },
   },
   {
     id: 7, icon: <ToggleRight size={48} />, title: "Trade Finance & Swaps",
@@ -125,6 +135,7 @@ const LEVERS = [
     ],
     outcomes: ["Offer letters of credit and bank guarantees to importers/exporters", "Earn swap fee income — retain deals you'd previously refer out", "Interest rate swaps for commercial loan hedging", "Compete with large banks for complex deals"],
     reps: ["brian"],
+    brochure: { url: BROCHURE_TRADE_URL, name: "Arvest Case study.pdf" },
   },
   {
     id: 8, icon: <ToggleRight size={48} />, title: "Tokenized Deposits",
@@ -140,8 +151,24 @@ const LEVERS = [
     ],
     outcomes: ["Easily join a consortium with confidence", "Issue tokenized deposits with complete ledger and settlement control", "Provide wallet experience for digital assets", "Unified ledger — no separate systems for digital assets"],
     reps: ["steve"],
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf", name: "Token Galaxy - Finzly.pdf" },
   },
 ];
+
+function recordDownload(email: string, leverTitle: string, brochureName: string, source: string) {
+  const downloads = JSON.parse(localStorage.getItem("finzly_downloads") || "[]");
+  const record = { email, leverTitle, brochureName, timestamp: new Date().toISOString(), source };
+  downloads.push(record);
+  localStorage.setItem("finzly_downloads", JSON.stringify(downloads));
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+  if (webhookUrl) {
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(record),
+    }).catch(() => {});
+  }
+}
 
 export default function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
@@ -149,9 +176,16 @@ export default function App() {
   const [headerCycle, setHeaderCycle] = useState(0);
   const [entryKey, setEntryKey] = useState(0);
   const [showDownloadGate, setShowDownloadGate] = useState(false);
+  const [sessionEmail, setSessionEmail] = useState<string>(() => sessionStorage.getItem("finzly_session_email") ?? "");
+  const [pendingDownloadId, setPendingDownloadId] = useState<number | null>(null);
   const isIdle = useIdleTimer(120_000);
   const isMobile = window.innerWidth < 768;
   const wasIdle = useRef(false);
+
+  const handleDownload = (pdfUrl: string, leverTitle: string, brochureName: string, source: string) => {
+    window.open(pdfUrl, '_blank');
+    recordDownload(sessionEmail, leverTitle, brochureName, source);
+  };
 
   useEffect(() => {
     const id = setInterval(() => setHeaderCycle(c => c + 1), 5_000);
@@ -175,30 +209,71 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.has("download")) {
+    const downloadParam = params.get("download");
+    if (!downloadParam) return;
+    const leverId = parseInt(downloadParam, 10);
+    const lever = LEVERS.find(l => l.id === leverId);
+    if (!lever) return;
+
+    const storedEmail = sessionStorage.getItem("finzly_session_email");
+    if (storedEmail) {
+      window.open(lever.brochure.url, '_blank');
+      recordDownload(storedEmail, lever.title, lever.brochure.name, "qr-scan");
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (isMobile) {
+      setPendingDownloadId(leverId);
+    } else {
       setShowDownloadGate(true);
+      setPendingDownloadId(leverId);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
       <LegoBackground />
 
-      {/* QR scan download gate — shown when ?download param is in URL */}
+      {/* Mobile session email gate — one-time capture on first mobile load */}
       <AnimatePresence>
-        {showDownloadGate && (
-          <EmailGateModal
-            pdfUrl={tcsPdf}
-            fileName="Finzly-Brochure.pdf"
-            title="Finzly Brochure"
-            onClose={() => {
-              setShowDownloadGate(false);
-              window.history.replaceState({}, "", window.location.pathname);
+        {isMobile && !sessionEmail && (
+          <SessionEmailGate
+            onEmailCaptured={(email) => {
+              setSessionEmail(email);
+              sessionStorage.setItem("finzly_session_email", email);
+              if (pendingDownloadId) {
+                const lever = LEVERS.find(l => l.id === pendingDownloadId)!;
+                handleDownload(lever.brochure.url, lever.title, lever.brochure.name, "qr-scan");
+                setPendingDownloadId(null);
+                window.history.replaceState({}, "", window.location.pathname);
+              }
             }}
-            dismissable={false}
-            source="qr-scan"
+            pendingDownloadId={pendingDownloadId}
           />
         )}
+      </AnimatePresence>
+
+      {/* Desktop QR scan download gate */}
+      <AnimatePresence>
+        {showDownloadGate && pendingDownloadId && (() => {
+          const lever = LEVERS.find(l => l.id === pendingDownloadId)!;
+          return (
+            <EmailGateModal
+              pdfUrl={lever.brochure.url}
+              title={lever.title}
+              onClose={() => {
+                setShowDownloadGate(false);
+                setPendingDownloadId(null);
+                window.history.replaceState({}, "", window.location.pathname);
+              }}
+              onEmailCaptured={(email) => {
+                setSessionEmail(email);
+                sessionStorage.setItem("finzly_session_email", email);
+              }}
+              dismissable={false}
+              source="qr-scan"
+            />
+          );
+        })()}
       </AnimatePresence>
 
       {/* Attract screen — shows on app load and after idle */}
@@ -318,6 +393,15 @@ export default function App() {
           <BlueprintCard
             lever={activeLever}
             onClose={() => setActiveId(null)}
+            sessionEmail={sessionEmail}
+            onDownload={(leverTitle, brochureName, source) => {
+              const lever = LEVERS.find(l => l.title === leverTitle)!;
+              handleDownload(lever.brochure.url, leverTitle, brochureName, source);
+            }}
+            onEmailCaptured={(email) => {
+              setSessionEmail(email);
+              sessionStorage.setItem("finzly_session_email", email);
+            }}
           />
         )}
       </AnimatePresence>

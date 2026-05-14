@@ -11,7 +11,6 @@ import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
 import karunaPhoto from "../../assets/karuna.jpeg";
 import christianPhoto from "../../assets/christian.jpg";
-import tcsPdf from "../../assets/tcs-tap.pdf";
 import EmailGateModal from "./EmailGateModal";
 
 const ALL_REPS: Record<string, { name: string; role: string; region: string; color: string; photo: string }> = {
@@ -27,6 +26,7 @@ const ALL_REPS: Record<string, { name: string; role: string; region: string; col
 
 interface BlueprintCardProps {
   lever: {
+    id: number;
     icon: React.ReactNode;
     title: string;
     benefit: string;
@@ -36,8 +36,12 @@ interface BlueprintCardProps {
     lego: Array<{ galaxy: string; label: string; sub: string }>;
     outcomes: string[];
     reps: string[];
+    brochure: { url: string; name: string };
   };
   onClose: () => void;
+  sessionEmail?: string;
+  onDownload: (leverTitle: string, brochureName: string, source: string) => void;
+  onEmailCaptured?: (email: string) => void;
 }
 
 const TABS = [
@@ -47,14 +51,12 @@ const TABS = [
   { id: "team", label: "Speak to Sales" },
 ];
 
-export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
+export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload, onEmailCaptured }: BlueprintCardProps) {
   const [activeTab, setActiveTab] = React.useState("blocks");
   const [showEmailGate, setShowEmailGate] = React.useState(false);
   const reps = (lever.reps || []).map(k => ALL_REPS[k]).filter(Boolean);
   const activeIndex = TABS.findIndex(tab => tab.id === activeTab);
-  const brochureUrl = "https://galaxy-tau-two.vercel.app/?download=brochure";
-  const tradePdfUrl = import.meta.env.VITE_TRADE_PDF_URL || tcsPdf;
-  const isTradeFinance = lever.title === "Trade Finance & Swaps";
+  const brochureUrl = `https://galaxy-tau-two.vercel.app/?download=${lever.id}`;
 
   const goNext = () => {
     playTabChange();
@@ -212,9 +214,7 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                 <div className="md:w-52 glass-panel p-5 rounded-2xl flex flex-col items-center justify-center gap-3 shrink-0">
                   <div className="text-center">
                     <div className="text-base font-medium text-slate-800 font-satoshi">
-                      {lever.title === "Trade Finance & Swaps"
-                        ? "Download Arvest Bank's case study"
-                        : "Download the brochure"}
+                      Download the brochure
                     </div>
                     <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">
                       <span className="hidden md:inline">Scan QR or ask your sales rep</span>
@@ -229,7 +229,13 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
                   {/* Mobile: download button (hidden on kiosk) */}
                   <button
                     className="md:hidden w-full flex items-center justify-center gap-2 bg-primary text-white font-black font-satoshi text-sm py-3 px-4 rounded-xl"
-                    onClick={() => setShowEmailGate(true)}
+                    onClick={() => {
+                      if (sessionEmail) {
+                        onDownload(lever.title, lever.brochure.name, "mobile-button");
+                      } else {
+                        setShowEmailGate(true);
+                      }
+                    }}
                   >
                     <Download size={16} />
                     Download Brochure
@@ -270,12 +276,12 @@ export default function BlueprintCard({ lever, onClose }: BlueprintCardProps) {
 
       {showEmailGate && (
         <EmailGateModal
-          pdfUrl={isTradeFinance ? tradePdfUrl : tcsPdf}
-          fileName={isTradeFinance ? "Finzly-Trade-Finance-Case-Study.pdf" : "Finzly-Brochure.pdf"}
-          title={isTradeFinance ? "Arvest Bank Case Study" : "Finzly Brochure"}
+          pdfUrl={lever.brochure.url}
+          title={lever.title}
           onClose={() => setShowEmailGate(false)}
+          onEmailCaptured={onEmailCaptured}
           dismissable={true}
-          source={isTradeFinance ? "mobile-button-trade-finance" : "mobile-button"}
+          source="mobile-button"
         />
       )}
     </motion.div>

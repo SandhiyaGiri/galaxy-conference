@@ -231,9 +231,8 @@ export default function App() {
 
     const storedEmail = localStorage.getItem("finzly_session_email");
     if (storedEmail) {
-      window.open(lever.brochure.url, '_blank');
       recordDownload(storedEmail, lever.title, lever.brochure.name, "qr-scan");
-      window.history.replaceState({}, "", window.location.pathname);
+      window.location.href = lever.brochure.url;
     } else if (isMobile) {
       setPendingDownloadId(leverId);
     } else {
@@ -256,9 +255,8 @@ export default function App() {
               localStorage.setItem("finzly_session_email", email);
               if (pendingDownloadId) {
                 const lever = LEVERS.find(l => l.id === pendingDownloadId)!;
-                handleDownload(lever.brochure.url, lever.title, lever.brochure.name, "qr-scan");
-                setPendingDownloadId(null);
-                window.history.replaceState({}, "", window.location.pathname);
+                recordDownload(email, lever.title, lever.brochure.name, "qr-scan");
+                window.location.href = lever.brochure.url;
               }
             }}
             pendingDownloadId={pendingDownloadId}

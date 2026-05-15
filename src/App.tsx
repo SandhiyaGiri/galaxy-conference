@@ -10,8 +10,6 @@ import SessionEmailGate from "./components/kiosk/SessionEmailGate";
 import { playCardOpen } from "./lib/sounds";
 import { useIdleTimer } from "./hooks/useIdleTimer";
 import finzlyLogo from "./assets/finzly-logo.png";
-const BROCHURE_FX_URL = import.meta.env.VITE_BROCHURE_FX_URL ||
-  "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/2025/Case%20Studies/Umpqua%20Bank%20Case%20Study.pdf";
 const BROCHURE_TRADE_URL = import.meta.env.VITE_BROCHURE_TRADE_URL ||
   "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/2025/Case%20Studies/Arvest%20Case%20study.pdf";
 

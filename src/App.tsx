@@ -280,6 +280,7 @@ export default function App() {
               onEmailCaptured={(email) => {
                 setSessionEmail(email);
                 localStorage.setItem("finzly_session_email", email);
+                recordDownload(email, lever.title, lever.brochure.name, "qr-scan");
               }}
               dismissable={false}
               source="qr-scan"
@@ -412,7 +413,8 @@ export default function App() {
             }}
             onEmailCaptured={(email) => {
               setSessionEmail(email);
-              sessionStorage.setItem("finzly_session_email", email);
+              localStorage.setItem("finzly_session_email", email);
+              recordDownload(email, activeLever.title, activeLever.brochure.name, "mobile-button");
             }}
           />
         )}

@@ -246,7 +246,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden md:overflow-hidden flex flex-col font-sans">
+    <div className="relative min-h-screen overflow-x-hidden flex flex-col font-sans">
       <LegoBackground />
 
       {/* Mobile session email gate — one-time capture on first mobile load */}
@@ -349,7 +349,7 @@ export default function App() {
       </header>
 
       {/* 3D Lego Grid */}
-      <main className="flex-1 max-w-[1080px] mx-auto w-full px-6 md:px-10 pb-4 overflow-hidden relative z-10">
+      <main className="flex-1 max-w-[1080px] mx-auto w-full px-6 md:px-10 pb-6 relative z-10">
         <div key={entryKey} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-7 pt-2 md:pt-3">
           {LEVERS.map((lever, index) => (
             <motion.div

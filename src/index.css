@@ -70,10 +70,10 @@ body {
   overflow-x: hidden;
 }
 
-/* Kiosk lock — desktop only */
+/* Kiosk lock — prevent horizontal scroll on desktop */
 @media (min-width: 768px) {
   body {
-    overflow: hidden;
+    overflow-x: hidden;
   }
 }
 

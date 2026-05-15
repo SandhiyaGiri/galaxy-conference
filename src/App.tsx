@@ -91,7 +91,7 @@ const LEVERS = [
     ],
     outcomes: ["New FX fee revenue from commercial clients", "Multi-currency accounts for international businesses", "Advanced FX instruments — compete with money-center banks", "Full international rails execution via Payment Galaxy"],
     reps: ["brian"],
-    brochure: { url: BROCHURE_FX_URL, name: "Umpqua Bank Case Study.pdf" },
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/FX%20Star%20-%20Finzly.pdf", name: "Umpqua Bank Case Study.pdf" },
   },
   {
     id: 5, icon: <ToggleRight size={48} />, title: "Trade Finance",

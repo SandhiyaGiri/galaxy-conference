@@ -118,7 +118,7 @@ const LEVERS = [
     ],
     outcomes: ["Grow new revenue with integrated derivatives alongside FX and trade", "Grow treasury relationships by offering end-to-end hedging solutions", "Increase wallet share through a single, unified client platform", "Simplify operations by managing FX, trade, and derivatives in one system"],
     reps: ["brian"],
-    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf", name: "Token Galaxy - Finzly.pdf" },
+    brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Market%20opportunity%20for%20Derivatives%20-%20Finzly.pdf", name: "Token Galaxy - Finzly.pdf" },
     ctaLabel: "Explore the market opportunity for Derivatives",
   },
   {

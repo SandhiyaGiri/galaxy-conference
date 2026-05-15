@@ -57,7 +57,7 @@ export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload
   const [showEmailGate, setShowEmailGate] = React.useState(false);
   const reps = (lever.reps || []).map(k => ALL_REPS[k]).filter(Boolean);
   const activeIndex = TABS.findIndex(tab => tab.id === activeTab);
-  const brochureUrl = `https://galaxy-tau-two.vercel.app/#download=${lever.id}`;
+  const brochureUrl = `https://content.finzly.com/finzpire-2026-digital-experience#download=${lever.id}`;
 
   const goNext = () => {
     playTabChange();

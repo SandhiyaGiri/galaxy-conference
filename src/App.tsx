@@ -221,26 +221,16 @@ export default function App() {
     }
   }, [isIdle]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.hash.slice(1));
-    const downloadParam = params.get("download");
-    if (!downloadParam) return;
-    const leverId = parseInt(downloadParam, 10);
-    const lever = LEVERS.find(l => l.id === leverId);
-    if (!lever) return;
-
-    const storedEmail = localStorage.getItem("finzly_session_email");
-    if (storedEmail) {
-      recordDownload(storedEmail, lever.title, lever.brochure.name, "qr-scan");
-      window.location.href = lever.brochure.url;
-    } else if (isMobile) {
-      setPendingDownloadId(leverId);
-    } else {
-      setShowDownloadGate(true);
-      setPendingDownloadId(leverId);
+  // QR-scan redirect: synchronous, before first paint so no gate ever renders.
+  // window.location.replace() navigates without pushing a history entry.
+  const _qrDownload = new URLSearchParams(window.location.hash.slice(1)).get("download");
+  if (_qrDownload) {
+    const _qrLever = LEVERS.find(l => l.id === parseInt(_qrDownload, 10));
+    if (_qrLever) {
+      window.location.replace(_qrLever.brochure.url);
+      return null;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }
 
   return (
     <div className="relative min-h-screen overflow-x-hidden flex flex-col font-sans">

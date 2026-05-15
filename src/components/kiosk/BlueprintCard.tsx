@@ -37,6 +37,7 @@ interface BlueprintCardProps {
     outcomes: string[];
     reps: string[];
     brochure: { url: string; name: string };
+    ctaLabel?: string;
   };
   onClose: () => void;
   sessionEmail?: string;
@@ -214,7 +215,7 @@ export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload
                 <div className="md:w-52 glass-panel p-5 rounded-2xl flex flex-col items-center justify-center gap-3 shrink-0">
                   <div className="text-center">
                     <div className="text-base font-medium text-slate-800 font-satoshi">
-                      Download the brochure
+                      {lever.ctaLabel || "Download the brochure"}
                     </div>
                     <div className="text-sm font-normal text-slate-500 font-satoshi mt-1">
                       <span className="hidden md:inline">Scan QR or ask your sales rep</span>
@@ -238,7 +239,7 @@ export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload
                     }}
                   >
                     <Download size={16} />
-                    Download Brochure
+                    {lever.ctaLabel || "Download Brochure"}
                   </button>
                 </div>
               </div>
@@ -251,23 +252,50 @@ export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload
               <p className="text-slate-500 text-base mb-5 font-normal font-satoshi">
                 Ready to explore {lever.title} for your bank? Our team will build your custom roadmap.
               </p>
-              <div className="flex flex-wrap gap-5 justify-center mb-6 items-stretch">
-                {reps.map(rep => (
-                  <div
-                    key={rep.name}
-                    className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
-                  >
-                    <img
-                      src={rep.photo}
-                      alt={rep.name}
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover"
-                    />
-                    <div className="text-center">
-                      <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
-                    </div>
+              {reps.length === 5 ? (
+                <div className="flex flex-col gap-5 items-center mb-6">
+                  <div className="flex gap-5 justify-center items-stretch">
+                    {reps.slice(0, 2).map(rep => (
+                      <div
+                        key={rep.name}
+                        className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
+                      >
+                        <img src={rep.photo} alt={rep.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover" />
+                        <div className="text-center">
+                          <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                  <div className="flex gap-5 justify-center items-stretch">
+                    {reps.slice(2).map(rep => (
+                      <div
+                        key={rep.name}
+                        className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
+                      >
+                        <img src={rep.photo} alt={rep.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover" />
+                        <div className="text-center">
+                          <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-5 justify-center mb-6 items-stretch max-w-[376px] mx-auto">
+                  {reps.map(rep => (
+                    <div
+                      key={rep.name}
+                      className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
+                    >
+                      <img src={rep.photo} alt={rep.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover" />
+                      <div className="text-center">
+                        <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           )}
 

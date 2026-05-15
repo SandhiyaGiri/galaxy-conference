@@ -15,7 +15,7 @@
 }
 
 html {
-  zoom: 0.9;
+  zoom: 0.95;
 }
 
 :root {
@@ -28,7 +28,8 @@ html {
   --popover: 0 0% 100%;
   --popover-foreground: 224 71.4% 4.1%;
 
-  --primary: 263.4 70% 50.4%; /* Finzly Blushing Purple */
+  --primary: 263.4 70% 50.4%;
+  /* Finzly Blushing Purple */
   --primary-foreground: 210 40% 98%;
 
   --secondary: 210 40% 96.1%;
@@ -71,7 +72,9 @@ body {
 
 /* Kiosk lock — desktop only */
 @media (min-width: 768px) {
-  body { overflow: hidden; }
+  body {
+    overflow: hidden;
+  }
 }
 
 .glass-panel {
@@ -105,7 +108,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, 
+  background: linear-gradient(45deg,
       transparent 0%,
       transparent 35%,
       rgba(255, 255, 255, 0.1) 45%,
@@ -118,9 +121,17 @@ body {
 }
 
 @keyframes shine {
-  0% { transform: translateX(-100%) rotate(-45deg); }
-  20% { transform: translateX(100%) rotate(-45deg); }
-  100% { transform: translateX(100%) rotate(-45deg); }
+  0% {
+    transform: translateX(-100%) rotate(-45deg);
+  }
+
+  20% {
+    transform: translateX(100%) rotate(-45deg);
+  }
+
+  100% {
+    transform: translateX(100%) rotate(-45deg);
+  }
 }
 
 .preserve-3d {
@@ -131,26 +142,28 @@ body {
 .font-outfit {
   font-family: 'Outfit', sans-serif;
 }
+
 .font-inter {
   font-family: 'Inter', sans-serif;
 }
+
 .font-satoshi {
   font-family: 'Satoshi', sans-serif;
 }
 
 .kiosk-modal-primary-button {
-  @apply w-full py-4 px-8 rounded-2xl bg-primary text-white font-black uppercase tracking-widest
-         transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-[0.98]
-         shadow-lg shadow-primary/20 border border-white/20;
+  @apply w-full py-4 px-8 rounded-2xl bg-primary text-white font-black uppercase tracking-widest transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-[0.98] shadow-lg shadow-primary/20 border border-white/20;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: hsl(210 40% 96.1%);
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsl(214.3 31.8% 85%);
   border-radius: 10px;

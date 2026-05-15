@@ -5,6 +5,23 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finzly Galaxy</title>
+    <script>
+      (function () {
+        var id = parseInt(new URLSearchParams(window.location.hash.slice(1)).get('download') || '', 10);
+        var urls = {
+          1: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Payment%20Galaxy%20-%20Finzly.pdf',
+          2: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf',
+          3: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Integrated%20payables%20-%20Finzly.pdf',
+          4: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/FX%20Star%20-%20Finzly.pdf',
+          5: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/2025/Case%20Studies/Arvest%20Case%20study.pdf',
+          6: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Token%20Galaxy%20-%20Finzly.pdf',
+          7: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Embedded%20Banking%20-%20Finzly.pdf',
+          8: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Specialty%20deposits%20-%20Finzly.pdf',
+          9: 'https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Partner%20Banking%20-%20Finzly.pdf'
+        };
+        if (urls[id]) window.location.replace(urls[id]);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -13,12 +13,17 @@ export default function SessionEmailGate({ onEmailCaptured, pendingDownloadId }:
   const [error, setError] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
-  const validate = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const PERSONAL_DOMAINS = ["gmail.com","yahoo.com","hotmail.com","outlook.com","aol.com","icloud.com","live.com","me.com","msn.com","protonmail.com","ymail.com","mail.com"];
+  const validate = (value: string) => {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return false;
+    const domain = value.split("@")[1]?.toLowerCase();
+    return !PERSONAL_DOMAINS.includes(domain);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate(email)) {
-      setError("Please enter a valid email address.");
+      setError("Please enter your work email address.");
       return;
     }
     setError("");

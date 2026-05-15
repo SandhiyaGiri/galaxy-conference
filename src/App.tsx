@@ -190,7 +190,7 @@ export default function App() {
   const [headerCycle, setHeaderCycle] = useState(0);
   const [entryKey, setEntryKey] = useState(0);
   const [showDownloadGate, setShowDownloadGate] = useState(false);
-  const [sessionEmail, setSessionEmail] = useState<string>(() => sessionStorage.getItem("finzly_session_email") ?? "");
+  const [sessionEmail, setSessionEmail] = useState<string>(() => localStorage.getItem("finzly_session_email") ?? "");
   const [pendingDownloadId, setPendingDownloadId] = useState<number | null>(null);
   const isIdle = useIdleTimer(120_000);
   const isMobile = window.innerWidth < 768;
@@ -229,7 +229,7 @@ export default function App() {
     const lever = LEVERS.find(l => l.id === leverId);
     if (!lever) return;
 
-    const storedEmail = sessionStorage.getItem("finzly_session_email");
+    const storedEmail = localStorage.getItem("finzly_session_email");
     if (storedEmail) {
       window.open(lever.brochure.url, '_blank');
       recordDownload(storedEmail, lever.title, lever.brochure.name, "qr-scan");
@@ -253,7 +253,7 @@ export default function App() {
           <SessionEmailGate
             onEmailCaptured={(email) => {
               setSessionEmail(email);
-              sessionStorage.setItem("finzly_session_email", email);
+              localStorage.setItem("finzly_session_email", email);
               if (pendingDownloadId) {
                 const lever = LEVERS.find(l => l.id === pendingDownloadId)!;
                 handleDownload(lever.brochure.url, lever.title, lever.brochure.name, "qr-scan");
@@ -281,7 +281,7 @@ export default function App() {
               }}
               onEmailCaptured={(email) => {
                 setSessionEmail(email);
-                sessionStorage.setItem("finzly_session_email", email);
+                localStorage.setItem("finzly_session_email", email);
               }}
               dismissable={false}
               source="qr-scan"

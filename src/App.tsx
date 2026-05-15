@@ -222,7 +222,7 @@ export default function App() {
   }, [isIdle]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.hash.slice(1));
     const downloadParam = params.get("download");
     if (!downloadParam) return;
     const leverId = parseInt(downloadParam, 10);

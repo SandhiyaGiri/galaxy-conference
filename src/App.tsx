@@ -106,7 +106,7 @@ const LEVERS = [
     outcomes: ["Boost fee revenue with higher trade and FX volumes", "Drive client growth through integrated treasury offerings", "Increase wallet share by embedding into daily client flows", "Lower costs via automation and fewer manual touchpoints"],
     reps: ["brian"],
     brochure: { url: BROCHURE_TRADE_URL, name: "Arvest Case study.pdf" },
-    ctaLabel: "Download Arvest bank’s case study",
+    ctaLabel: "Download Arvest Bank’s case study",
   },
   {
     id: 6, icon: <ToggleRight size={48} />, title: "Derivatives",

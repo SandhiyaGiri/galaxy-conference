@@ -38,7 +38,7 @@ const LEVERS = [
       { galaxy: "payment", label: "Payment Orchestration", sub: "Route across all rails" },
     ],
     outcomes: ["Modular transformation — surround and shrink legacy core", "Unify all rails under one engine", "Pure orchestration for incumbents — no rip and replace", "Battle-tested scalability for high-volume, mission-critical payment processing"],
-    reps: ["chris", "christian", "melissa", "sam", "scott"],
+    reps: ["chris", "christian", "melissa", "sam", "scott", "jane"],
     brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Payment%20Galaxy%20-%20Finzly.pdf", name: "Payment Galaxy - Finzly.pdf" },
   },
   {
@@ -71,7 +71,7 @@ const LEVERS = [
       { galaxy: "digital", label: "Consumer Payments", sub: "Wires and instant payments" },
     ],
     outcomes: ["Match the largest bank digital experiences", "Already in the Q2 and broader digital banking ecosystem", "Pay-by-bank — no card rails, lower cost", "White-label partner VAM portal for fintechs under your brand"],
-    reps: ["chris", "christian", "melissa", "sam", "scott"],
+    reps: ["chris", "christian", "melissa", "sam", "scott", "jane"],
     brochure: { url: "https://9127127.fs1.hubspotusercontent-na1.net/hubfs/9127127/Integrated%20payables%20-%20Finzly.pdf", name: "Digital Galaxy - Finzly.pdf" },
     ctaLabel: "See how you can offer Integrated Payables",
   },

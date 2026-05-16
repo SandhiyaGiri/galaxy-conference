@@ -11,6 +11,7 @@ import chrisPhoto from "../../assets/chris.jpeg";
 import stevePhoto from "../../assets/steve.jpg";
 import karunaPhoto from "../../assets/karuna.jpeg";
 import christianPhoto from "../../assets/christian.jpg";
+import janePhoto from "../../assets/Jane.jpeg";
 import EmailGateModal from "./EmailGateModal";
 
 const ALL_REPS: Record<string, { name: string; role: string; region: string; color: string; photo: string }> = {
@@ -22,6 +23,7 @@ const ALL_REPS: Record<string, { name: string; role: string; region: string; col
   steve: { name: "Steve T", role: "Token & Digital Assets", region: "Global", color: "#993556", photo: stevePhoto },
   karuna: { name: "Karuna", role: "Vice President Sales", region: "Global", color: "#4F86C6", photo: karunaPhoto },
   christian: { name: "Christian", role: "Account Executive", region: "Global", color: "#2E5C8A", photo: christianPhoto },
+  jane: { name: "Jane", role: "Sales Executive", region: "Global", color: "#C25B8A", photo: janePhoto },
 };
 
 interface BlueprintCardProps {
@@ -252,7 +254,21 @@ export default function BlueprintCard({ lever, onClose, sessionEmail, onDownload
               <p className="text-slate-500 text-base mb-5 font-normal font-satoshi">
                 Ready to explore {lever.title} for your bank? Our team will build your custom roadmap.
               </p>
-              {reps.length === 5 ? (
+              {reps.length === 6 ? (
+                <div className="grid grid-cols-3 gap-5 mb-6 justify-items-center">
+                  {reps.map(rep => (
+                    <div
+                      key={rep.name}
+                      className="glass-panel flex flex-col items-center gap-3 p-5 rounded-2xl w-44"
+                    >
+                      <img src={rep.photo} alt={rep.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover" />
+                      <div className="text-center">
+                        <div className="font-black text-base text-slate-900 font-satoshi">{rep.name}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : reps.length === 5 ? (
                 <div className="flex flex-col gap-5 items-center mb-6">
                   <div className="flex gap-5 justify-center items-stretch">
                     {reps.slice(0, 2).map(rep => (
